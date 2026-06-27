@@ -219,6 +219,27 @@ const PHASES = {
 const PHASE_KEYS = Object.keys(PHASES);
 const INHOUSE_KEY = "inhouse-list-v1";
 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgkHnz8YjKGWtX_ksXeG5WjjT_WNMzzPJ1lKnCilUTr1SoVkb3B4cv84-mWKyCrD8lSQ/exec";
+
+async function scriptGet(sheet, key) {
+  const url = `${SCRIPT_URL}?action=get&sheet=${encodeURIComponent(sheet)}`;
+  const res = await fetch(url);
+  const json = await res.json();
+  if (json.error) throw new Error(json.error);
+  return json.data && json.data[key] !== undefined ? json.data[key] : null;
+}
+
+async function scriptSet(sheet, key, value) {
+  const res = await fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify({ action: "set", sheet: sheet, key: key, value: value })
+  });
+  const json = await res.json();
+  if (json.error) throw new Error(json.error);
+  return json.success === true;
+}
+
 let state = {
   activeTab: "all",   // "phase1" | "phase2" | "all"
   units: {},             // phaseKey -> { unitNo -> unitData }
@@ -241,9 +262,10 @@ function defaultUnitData() {
 async function loadData() {
   for (const phaseKey of PHASE_KEYS) {
     try {
-      const res = await window.storage.get(PHASES[phaseKey].storageKey, true);
-      state.units[phaseKey] = res ? JSON.parse(res.value) : {};
+      const value = await scriptGet(phaseKey, "units");
+      state.units[phaseKey] = value ? JSON.parse(value) : {};
     } catch (e) {
+      console.error("Load failed for", phaseKey, e);
       state.units[phaseKey] = {};
     }
     unitList(phaseKey).forEach(no => {
@@ -251,17 +273,18 @@ async function loadData() {
     });
   }
   try {
-    const res = await window.storage.get(INHOUSE_KEY, true);
-    state.inhouseList = res ? JSON.parse(res.value) : [];
+    const value = await scriptGet("inhouse", "list");
+    state.inhouseList = value ? JSON.parse(value) : [];
   } catch (e) {
+    console.error("Load failed for inhouse list", e);
     state.inhouseList = [];
   }
 }
 
 async function saveUnits(phaseKey, retries = 1) {
   try {
-    const result = await window.storage.set(PHASES[phaseKey].storageKey, JSON.stringify(state.units[phaseKey]), true);
-    if (!result) throw new Error("Storage returned no result");
+    const ok = await scriptSet(phaseKey, "units", JSON.stringify(state.units[phaseKey]));
+    if (!ok) throw new Error("Script returned no success");
     return true;
   } catch (e) {
     console.error("Save failed", e);
@@ -276,8 +299,8 @@ async function saveUnits(phaseKey, retries = 1) {
 
 async function saveInhouse(retries = 1) {
   try {
-    const result = await window.storage.set(INHOUSE_KEY, JSON.stringify(state.inhouseList), true);
-    if (!result) throw new Error("Storage returned no result");
+    const ok = await scriptSet("inhouse", "list", JSON.stringify(state.inhouseList));
+    if (!ok) throw new Error("Script returned no success");
     return true;
   } catch (e) {
     console.error("Save failed", e);
