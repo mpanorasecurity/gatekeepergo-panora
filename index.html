@@ -93,6 +93,7 @@
   .filter-group-pills{display:flex;gap:8px;flex-wrap:wrap;}
 
   .setup-btn{padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);font-size:12px;cursor:pointer;color:var(--text-secondary);}
+  .setup-btn.admin-active{border-color:#0F6E56;background:#E1F5EE;color:#085041;font-weight:600;}
 
   .street-group{
     border:1px solid #000000;border-radius:var(--radius-lg);padding:14px;margin-bottom:14px;background:#FAFAF8;
@@ -245,8 +246,11 @@ let state = {
   units: {},             // phaseKey -> { unitNo -> unitData }
   inhouseList: [],
   filter: "all",
-  search: ""
+  search: "",
+  isAdmin: false
 };
+
+const ADMIN_PASSWORD = "admin123";
 
 function unitList(phaseKey) {
   const total = PHASES[phaseKey].total;
@@ -454,7 +458,10 @@ function render() {
         <h1>${pageTitle}</h1>
         <p>${combined.total} units</p>
       </div>
-      <button class="setup-btn" id="setupBtn">Manage in-house list</button>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
+        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
+      </div>
     </div>
 
     <div class="tabs">
@@ -565,9 +572,31 @@ function render() {
     });
   });
   document.querySelectorAll(".unit-card").forEach(card => {
-    card.addEventListener("click", () => openUnitModal(card.dataset.phase, card.dataset.unit));
+    card.addEventListener("click", () => {
+      if (!state.isAdmin) {
+        alert("Viewing only. Log in as admin to update unit status.");
+        return;
+      }
+      openUnitModal(card.dataset.phase, card.dataset.unit);
+    });
   });
-  document.getElementById("setupBtn").addEventListener("click", openInhouseModal);
+  const setupBtnEl = document.getElementById("setupBtn");
+  if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
+  document.getElementById("adminBtn").addEventListener("click", () => {
+    if (state.isAdmin) {
+      state.isAdmin = false;
+      render();
+    } else {
+      const entered = prompt("Enter admin password:");
+      if (entered === null) return;
+      if (entered === ADMIN_PASSWORD) {
+        state.isAdmin = true;
+        render();
+      } else {
+        alert("Incorrect password.");
+      }
+    }
+  });
 }
 
 function openUnitModal(phaseKey, unitNo) {
