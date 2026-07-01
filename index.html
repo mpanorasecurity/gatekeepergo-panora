@@ -449,38 +449,36 @@ function lotToUnitKey(phase, lot) {
 function blockUnits(block) {
   const [start, end] = block.lots;
   const addrMap = PHASES[block.phase].addressMap;
-  // Build lot→key map for this phase
+  const streetSuffix = block.street.replace("Jalan M-Panora ", "");
+
+  // Build lot→key map (handles both string and number lot values)
   const lotKeyMap = {};
   Object.keys(addrMap).forEach(k => { lotKeyMap[String(addrMap[k].lot)] = k; });
 
-  const units = [];
-  if (typeof start === "string" || typeof end === "string") {
-    // handle special named lots (e.g. 113A) — just find all keys in this street range
-    const streetKeys = Object.keys(addrMap).filter(k => addrMap[k].address.includes(block.street.replace("Jalan M-Panora ", "Jalan M-Panora ")));
-    // fallback: gather by lot number range using numeric portion
-    const startNum = parseInt(start) || parseInt(end);
-    const endNum = parseInt(end) || parseInt(start);
-    const lo = Math.min(startNum, endNum), hi = Math.max(startNum, endNum);
-    Object.keys(addrMap).forEach(k => {
-      const lotNum = parseInt(addrMap[k].lot);
-      if (lotNum >= lo && lotNum <= hi && addrMap[k].address.includes(block.street.split("Jalan M-Panora ")[1])) {
-        units.push(k);
-      }
-    });
-    // also grab the special string lot
-    const specialKey = Object.keys(addrMap).find(k => String(addrMap[k].lot) === String(typeof start === "string" ? start : end));
-    if (specialKey && !units.includes(specialKey)) units.push(specialKey);
-    units.sort((a,b) => parseInt(a)-parseInt(b));
-    return units;
-  }
+  const startNum = parseInt(String(start));
+  const endNum = parseInt(String(end));
+  const lo = Math.min(startNum, endNum);
+  const hi = Math.max(startNum, endNum);
 
-  const lo = Math.min(start, end), hi = Math.max(start, end);
+  const units = [];
   for (let lot = lo; lot <= hi; lot++) {
     const key = lotKeyMap[String(lot)];
-    if (key) units.push(key);
+    if (key && addrMap[key].address.includes(streetSuffix)) units.push(key);
   }
-  // sort by lot number order as they appear in the block (start→end direction)
-  if (start > end) units.reverse();
+  // Also grab any string-named special lots (e.g. "113A") in the range
+  Object.keys(addrMap).forEach(k => {
+    const lotVal = String(addrMap[k].lot);
+    if (isNaN(lotVal) && parseInt(lotVal) >= lo && parseInt(lotVal) <= hi && addrMap[k].address.includes(streetSuffix)) {
+      if (!units.includes(k)) units.push(k);
+    }
+  });
+
+  // Sort by lot number, preserving right-to-left block direction
+  units.sort((a, b) => {
+    const la = parseInt(String(addrMap[a].lot));
+    const lb = parseInt(String(addrMap[b].lot));
+    return start > end ? lb - la : la - lb;
+  });
   return units;
 }
 
