@@ -184,6 +184,19 @@
     .stats .stat-card:first-child{grid-column:1 / -1;}
     .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
   }
+  /* ── Site Map ── */
+  .sm-legend{display:flex;flex-wrap:wrap;gap:10px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:12px;}
+  .sm-leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-secondary);}
+  .sm-leg-dot{width:14px;height:14px;border-radius:3px;border:1.5px solid;flex-shrink:0;}
+  .sm-phases{display:flex;gap:0;align-items:flex-start;}
+  .sm-phase-col{flex:1;min-width:0;}
+  .sm-phase-divider{width:1px;background:var(--border);margin:0 12px;align-self:stretch;}
+  .sm-phase-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--text-primary);}
+  .sm-block{margin-bottom:10px;padding:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);}
+  .sm-street{font-size:10px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em;}
+  .sm-row{display:flex;flex-wrap:wrap;gap:3px;}
+  .sm-unit{padding:3px 4px;border:1.5px solid;border-radius:3px;font-size:9px;font-weight:600;cursor:pointer;white-space:nowrap;line-height:1.3;transition:opacity 0.1s;}
+  .sm-unit:hover{opacity:0.75;}
 </style>
 </head>
 <body>
@@ -406,7 +419,184 @@ function renderUnitCard(phaseKey, no, isAll) {
   `;
 }
 
+// ── Site Map ──────────────────────────────────────────────────────────────────
+const SITE_BLOCKS = [
+  // Phase 1
+  { phase: "phase1", street: "Jalan M-Panora 1/1", lots: [150,179] },
+  { phase: "phase1", street: "Jalan M-Panora 1/1", lots: [212,180] },
+  { phase: "phase1", street: "Jalan M-Panora 1/2", lots: [213,248] },
+  { phase: "phase1", street: "Jalan M-Panora 1/2", lots: [286,249] },
+  { phase: "phase1", street: "Jalan M-Panora 1/3", lots: [287,322] },
+  { phase: "phase1", street: "Jalan M-Panora 1/4", lots: [346,323] },
+  { phase: "phase1", street: "Jalan M-Panora 1/5", lots: [347,370] },
+  { phase: "phase1", street: "Jalan M-Panora 1/5", lots: [396,371] },
+  // Phase 2
+  { phase: "phase2", street: "Jalan M-Panora 2/1", lots: [1,11] },
+  { phase: "phase2", street: "Jalan M-Panora 2/2", lots: [22,12] },
+  { phase: "phase2", street: "Jalan M-Panora 2/2", lots: [23,32] },
+  { phase: "phase2", street: "Jalan M-Panora 2/3", lots: [58,33] },
+  { phase: "phase2", street: "Jalan M-Panora 2/3", lots: [59,85] },
+  { phase: "phase2", street: "Jalan M-Panora 2/4", lots: ["113A",86] },
+  { phase: "phase2", street: "Jalan M-Panora 2/4", lots: [115,149] },
+];
+
+function lotToUnitKey(phase, lot) {
+  const addrMap = PHASES[phase].addressMap;
+  const lotStr = String(lot);
+  return Object.keys(addrMap).find(k => String(addrMap[k].lot) === lotStr) || null;
+}
+
+function blockUnits(block) {
+  const [start, end] = block.lots;
+  const addrMap = PHASES[block.phase].addressMap;
+  // Build lot→key map for this phase
+  const lotKeyMap = {};
+  Object.keys(addrMap).forEach(k => { lotKeyMap[String(addrMap[k].lot)] = k; });
+
+  const units = [];
+  if (typeof start === "string" || typeof end === "string") {
+    // handle special named lots (e.g. 113A) — just find all keys in this street range
+    const streetKeys = Object.keys(addrMap).filter(k => addrMap[k].address.includes(block.street.replace("Jalan M-Panora ", "Jalan M-Panora ")));
+    // fallback: gather by lot number range using numeric portion
+    const startNum = parseInt(start) || parseInt(end);
+    const endNum = parseInt(end) || parseInt(start);
+    const lo = Math.min(startNum, endNum), hi = Math.max(startNum, endNum);
+    Object.keys(addrMap).forEach(k => {
+      const lotNum = parseInt(addrMap[k].lot);
+      if (lotNum >= lo && lotNum <= hi && addrMap[k].address.includes(block.street.split("Jalan M-Panora ")[1])) {
+        units.push(k);
+      }
+    });
+    // also grab the special string lot
+    const specialKey = Object.keys(addrMap).find(k => String(addrMap[k].lot) === String(typeof start === "string" ? start : end));
+    if (specialKey && !units.includes(specialKey)) units.push(specialKey);
+    units.sort((a,b) => parseInt(a)-parseInt(b));
+    return units;
+  }
+
+  const lo = Math.min(start, end), hi = Math.max(start, end);
+  for (let lot = lo; lot <= hi; lot++) {
+    const key = lotKeyMap[String(lot)];
+    if (key) units.push(key);
+  }
+  // sort by lot number order as they appear in the block (start→end direction)
+  if (start > end) units.reverse();
+  return units;
+}
+
+const STATUS_COLORS = {
+  vacant:     { bg: "#EDEBE4", border: "#888780", text: "#444441" },
+  vp:         { bg: "#FFF9D6", border: "#C9A400", text: "#705C00" },
+  renovation: { bg: "#E1EEFD", border: "#1768D1", text: "#0D4A99" },
+  movein:     { bg: "#E1F5EE", border: "#22C55E", text: "#085041" },
+};
+
+function renderSiteMap() {
+  const app = document.getElementById("app");
+  const tab = state.activeTab;
+
+  const phase1Blocks = SITE_BLOCKS.filter(b => b.phase === "phase1");
+  const phase2Blocks = SITE_BLOCKS.filter(b => b.phase === "phase2");
+
+  function buildBlockHtml(block) {
+    const units = blockUnits(block);
+    const unitBoxes = units.map(key => {
+      const u = state.units[block.phase] && state.units[block.phase][key];
+      const status = u ? u.status : "vacant";
+      const c = STATUS_COLORS[status] || STATUS_COLORS.vacant;
+      const addrMap = PHASES[block.phase].addressMap;
+      const lot = addrMap[key] ? "P-" + addrMap[key].lot : key;
+      const isExpired = status === "renovation" && u && u.permitExpiry && (() => {
+        const [d,m,y] = (u.permitExpiry||"").split(".");
+        return y && new Date(`20${y}`,m-1,d) < new Date();
+      })();
+      const bg = isExpired ? "#FDEAEA" : c.bg;
+      const border = isExpired ? "#C94343" : c.border;
+      return `<div class="sm-unit" style="background:${bg};border-color:${border};color:${c.text}"
+        data-phase="${block.phase}" data-unit="${key}" title="P-${addrMap[key]?.lot} · ${addrMap[key]?.address}">${lot}</div>`;
+    }).join("");
+    return `
+      <div class="sm-block">
+        <div class="sm-street">${block.street}</div>
+        <div class="sm-row">${unitBoxes}</div>
+      </div>`;
+  }
+
+  const p1Html = phase1Blocks.map(buildBlockHtml).join("");
+  const p2Html = phase2Blocks.map(buildBlockHtml).join("");
+
+  app.innerHTML = `
+    <div class="masthead">
+      <img src="${LOGO_B64}" width="44" height="44" style="border-radius:10px;flex-shrink:0">
+      <div>
+        <div class="app-title">GatekeeperGo</div>
+        <div class="app-sub">M Panora Unit Status Tracker</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+        ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
+        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn" data-tab="all">ALL</button>
+      ${PHASE_KEYS.map(pk => `<button class="tab-btn" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
+      <button class="tab-btn active" data-tab="sitemap">Site Map</button>
+    </div>
+
+    <div class="sm-legend">
+      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#EDEBE4;border-color:#888780"></span>Vacant</span>
+      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#FFF9D6;border-color:#C9A400"></span>VP</span>
+      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#E1EEFD;border-color:#1768D1"></span>Renovation</span>
+      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#E1F5EE;border-color:#22C55E"></span>Move-in</span>
+      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#FDEAEA;border-color:#C94343"></span>Expired</span>
+    </div>
+
+    <div class="sm-phases">
+      <div class="sm-phase-col">
+        <div class="sm-phase-title">Phase 1</div>
+        ${p1Html}
+      </div>
+      <div class="sm-phase-divider"></div>
+      <div class="sm-phase-col">
+        <div class="sm-phase-title">Phase 2</div>
+        ${p2Html}
+      </div>
+    </div>
+  `;
+
+  // wire up tab clicks
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.activeTab = btn.dataset.tab;
+      state.filter = "all";
+      state.search = "";
+      render();
+    });
+  });
+
+  // wire up unit clicks (admin only)
+  document.querySelectorAll(".sm-unit").forEach(el => {
+    el.addEventListener("click", () => {
+      if (!state.isAdmin) { alert("Viewing only. Log in as admin to update unit status."); return; }
+      openUnitModal(el.dataset.phase, el.dataset.unit);
+    });
+  });
+
+  // admin/setup buttons
+  const adminBtn = document.getElementById("adminBtn");
+  if (adminBtn) adminBtn.addEventListener("click", () => {
+    if (state.isAdmin) { state.isAdmin = false; render(); return; }
+    const entered = prompt("Enter admin password:");
+    if (entered === ADMIN_PASSWORD) { state.isAdmin = true; render(); }
+    else if (entered !== null) alert("Incorrect password.");
+  });
+  const setupBtnEl = document.getElementById("setupBtn");
+  if (setupBtnEl) setupBtnEl.addEventListener("click", openSetupModal);
+}
+
 function render() {
+  if (state.activeTab === "sitemap") { renderSiteMap(); return; }
   const app = document.getElementById("app");
   const tab = state.activeTab;
   const isAll = tab === "all";
@@ -474,6 +664,7 @@ function render() {
     <div class="tabs">
       <button class="tab-btn ${tab === 'all' ? 'active' : ''}" data-tab="all">ALL</button>
       ${PHASE_KEYS.map(pk => `<button class="tab-btn ${tab === pk ? 'active' : ''}" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
+      <button class="tab-btn ${tab === 'sitemap' ? 'active' : ''}" data-tab="sitemap">Site Map</button>
     </div>
 
     <div class="stats ${isAll ? 'stats-5' : ''}">
