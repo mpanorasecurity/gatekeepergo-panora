@@ -1,1111 +1,1700 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GatekeeperGo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-page:#FFFFFF;
-    --bg-card:#FFFFFF;
-    --border:#D3D1C7;
-    --border-soft:#E3E1D8;
-    --text-primary:#2C2C2A;
-    --text-secondary:#5F5E5A;
-    --text-tertiary:#888780;
-    --radius-md:8px;
-    --radius-lg:12px;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GatekeeperGo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg-page: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --border: #D3D1C7;
+            --border-soft: #E3E1D8;
+            --text-primary: #2C2C2A;
+            --text-secondary: #5F5E5A;
+            --text-tertiary: #888780;
+            --radius-md: 8px;
+            --radius-lg: 12px;
 
-    --vacant-50:#EDEBE4; --vacant-600:#888780; --vacant-800:#444441; --vacant-900:#2C2C2A;
-    --vp-50:#FFF9D6; --vp-600:#C9A400; --vp-800:#705C00; --vp-900:#473A00;
-    --reno-50:#E1EEFD; --reno-600:#1768D1; --reno-800:#0D4A99; --reno-900:#082F61;
-    --movein-50:#E1F5EE; --movein-600:#0F6E56; --movein-800:#085041; --movein-900:#04342C;
-    --danger-50:#FCEBEB; --danger-600:#A32D2D; --danger-800:#791F1F; --danger-900:#501313;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg-page);
-    color:var(--text-primary);
-  }
-  .app{max-width:1280px;margin:0 auto;padding:24px 20px 60px;}
+            --vacant-50: #EDEBE4;
+            --vacant-600: #888780;
+            --vacant-800: #444441;
+            --vacant-900: #2C2C2A;
+            --vp-50: #FFF9D6;
+            --vp-600: #C9A400;
+            --vp-800: #705C00;
+            --vp-900: #473A00;
+            --reno-50: #E1EEFD;
+            --reno-600: #1768D1;
+            --reno-800: #0D4A99;
+            --reno-900: #082F61;
+            --movein-50: #E1F5EE;
+            --movein-600: #0F6E56;
+            --movein-800: #085041;
+            --movein-900: #04342C;
+            --danger-50: #FCEBEB;
+            --danger-600: #A32D2D;
+            --danger-800: #791F1F;
+            --danger-900: #501313;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-primary);
+        }
+        .app {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+        }
 
-  .header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
-  .masthead{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-    font-size:36px;font-weight:700;letter-spacing:0.02em;color:var(--text-primary);
-    margin-bottom:20px;font-family:'Cormorant Garamond',Georgia,serif;
-    flex-wrap:wrap;
-  }
-  .masthead-left{display:flex;align-items:center;gap:10px;}
-  .masthead-right{display:flex;gap:8px;align-items:center;}
-  .app-title{font-size:36px;font-weight:700;font-family:'Cormorant Garamond',Georgia,serif;line-height:1;}
-  .app-sub{font-size:14px;color:var(--text-secondary);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-weight:400;}
-  .header h1{font-size:20px;font-weight:600;margin:0 0 4px;}
-  .header p{font-size:13px;color:var(--text-secondary);margin:0;}
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .masthead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            flex-wrap: wrap;
+        }
+        .masthead-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .masthead-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .app-title {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            line-height: 1;
+        }
+        .app-sub {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 400;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 4px;
+        }
+        .header p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
 
-  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
-  .tab-btn{
-    padding:10px 20px;border:1px solid #000000;border-radius:var(--radius-lg);background:var(--bg-card);
-    font-size:14px;font-weight:600;cursor:pointer;color:var(--text-secondary);
-  }
-  .tab-btn.active{color:var(--bg-card);background:var(--text-primary);border-color:var(--text-primary);}
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            border: 1px solid #000000;
+            border-radius: var(--radius-lg);
+            background: var(--bg-card);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .tab-btn.active {
+            color: var(--bg-card);
+            background: var(--text-primary);
+            border-color: var(--text-primary);
+        }
 
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
-  .stats.stats-5{grid-template-columns:repeat(5,1fr);}
-  .stat-card{background:var(--bg-card);border:1px solid #000000;border-radius:var(--radius-lg);padding:12px 14px;}
-  .stat-card.stat-vacant{background:var(--vacant-50);border:1px solid #000000;}
-  .stat-card.stat-vacant .stat-num{color:var(--vacant-900);}
-  .stat-card.stat-vp{background:var(--vp-50);border:1px solid var(--vp-600);}
-  .stat-card.stat-vp .stat-num{color:var(--vp-900);}
-  .stat-card.stat-renovation{background:var(--reno-50);border:1px solid var(--reno-600);}
-  .stat-card.stat-renovation .stat-num{color:var(--reno-900);}
-  .stat-card.stat-movein{background:var(--movein-50);border:1px solid #22C55E;}
-  .stat-card.stat-movein .stat-num{color:var(--movein-900);}
-  .stat-num{font-size:22px;font-weight:600;line-height:1.2;}
-  .stat-label{font-size:11px;color:var(--text-secondary);margin-top:2px;line-height:1.3;}
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .stats.stats-5 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid #000000;
+            border-radius: var(--radius-lg);
+            padding: 12px 14px;
+        }
+        .stat-card.stat-vacant {
+            background: var(--vacant-50);
+            border: 1px solid #000000;
+        }
+        .stat-card.stat-vacant .stat-num {
+            color: var(--vacant-900);
+        }
+        .stat-card.stat-vp {
+            background: var(--vp-50);
+            border: 1px solid var(--vp-600);
+        }
+        .stat-card.stat-vp .stat-num {
+            color: var(--vp-900);
+        }
+        .stat-card.stat-renovation {
+            background: var(--reno-50);
+            border: 1px solid var(--reno-600);
+        }
+        .stat-card.stat-renovation .stat-num {
+            color: var(--reno-900);
+        }
+        .stat-card.stat-movein {
+            background: var(--movein-50);
+            border: 1px solid #22C55E;
+        }
+        .stat-card.stat-movein .stat-num {
+            color: var(--movein-900);
+        }
+        .stat-num {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            line-height: 1.3;
+        }
 
-  .alert-banner{
-    display:none;
-    background:var(--danger-50);border:1px solid var(--danger-600);border-radius:var(--radius-lg);
-    padding:10px 14px;margin-bottom:16px;color:var(--danger-900);font-size:13px;
-    align-items:flex-start;gap:8px;
-  }
-  .alert-banner.show{display:flex;}
-  .alert-banner b{color:var(--danger-900);}
-  .alert-banner.expired-banner{background:#FDF0F0;border-color:#E68A8A;color:#8C2E2E;}
-  .alert-banner.expired-banner b{color:#8C2E2E;}
+        .alert-banner {
+            display: none;
+            background: var(--danger-50);
+            border: 1px solid var(--danger-600);
+            border-radius: var(--radius-lg);
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            color: var(--danger-900);
+            font-size: 13px;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .alert-banner.show {
+            display: flex;
+        }
+        .alert-banner b {
+            color: var(--danger-900);
+        }
+        .alert-banner.expired-banner {
+            background: #FDF0F0;
+            border-color: #E68A8A;
+            color: #8C2E2E;
+        }
+        .alert-banner.expired-banner b {
+            color: #8C2E2E;
+        }
 
-  .search-row{margin-bottom:12px;}
-  .search-row input[type=text]{
-    width:100%;padding:12px 14px;border:1px solid #000000;border-radius:var(--radius-md);
-    font-size:16px;font-weight:500;background:var(--bg-card);color:var(--text-primary);
-  }
-  .filter-btn{
-    padding:7px 12px;border:1px solid #000000;border-radius:999px;background:var(--bg-card);
-    font-size:12px;cursor:pointer;color:var(--text-secondary);white-space:nowrap;
-  }
-  .filter-btn.active{border-color:var(--text-primary);color:var(--text-primary);font-weight:600;background:var(--border-soft);}
-  .filter-btn .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+        .search-row {
+            margin-bottom: 12px;
+        }
+        .search-row input[type=text] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #000000;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 500;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        .filter-btn {
+            padding: 7px 12px;
+            border: 1px solid #000000;
+            border-radius: 999px;
+            background: var(--bg-card);
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .filter-btn.active {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+            background: var(--border-soft);
+        }
+        .filter-btn .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
 
-  .filter-group{
-    border:1px solid #000000;border-radius:var(--radius-lg);padding:10px 12px;background:var(--bg-card);margin-bottom:14px;
-  }
-  .filter-group-title{font-size:11px;font-weight:700;letter-spacing:0.04em;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;}
-  .filter-group-pills{display:flex;gap:8px;flex-wrap:wrap;}
+        .filter-group {
+            border: 1px solid #000000;
+            border-radius: var(--radius-lg);
+            padding: 10px 12px;
+            background: var(--bg-card);
+            margin-bottom: 14px;
+        }
+        .filter-group-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .filter-group-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
-  .setup-btn{padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);font-size:12px;cursor:pointer;color:var(--text-secondary);}
-  .setup-btn.admin-active{border-color:#0F6E56;background:#E1F5EE;color:#085041;font-weight:600;}
+        .setup-btn {
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .setup-btn.admin-active {
+            border-color: #0F6E56;
+            background: #E1F5EE;
+            color: #085041;
+            font-weight: 600;
+        }
 
-  .street-group{
-    border:1px solid #000000;border-radius:var(--radius-lg);padding:14px;margin-bottom:14px;background:#FAFAF8;
-  }
-  .street-group-header{
-    font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:10px;
-    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  }
-  .street-group-count{font-size:11px;font-weight:400;color:var(--text-tertiary);}
-  .street-group-breakdown{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:500;color:var(--text-secondary);}
-  .sgb-item{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;}
-  .sgb-dot{display:inline-block;width:7px;height:7px;border-radius:50%;}
+        .street-group {
+            border: 1px solid #000000;
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            margin-bottom: 14px;
+            background: #FAFAF8;
+        }
+        .street-group-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .street-group-count {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-tertiary);
+        }
+        .street-group-breakdown {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .sgb-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        .sgb-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
 
-  .grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;
-  }
-  .unit-card{
-    border-radius:var(--radius-md);padding:10px 10px 8px;cursor:pointer;border:1px solid transparent;
-    transition:transform 0.06s ease;position:relative;text-align:center;
-  }
-  .unit-card:hover{transform:translateY(-1px);}
-  .unit-card .uphase{font-size:9px;font-weight:600;letter-spacing:0.04em;margin:0 0 3px;opacity:0.6;text-transform:uppercase;}
-  .unit-card .uno{font-size:14px;font-weight:500;margin:0 0 4px;opacity:0.85;}
-  .unit-card .uaddr{font-size:13px;font-weight:600;margin:0 0 2px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .unit-card .ustatus{font-size:11px;font-weight:500;}
-  .unit-card .uflag{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--danger-600);}
-  .unit-card .uflag.expired{background:#E68A8A;right:16px;}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 8px;
+        }
+        .unit-card {
+            border-radius: var(--radius-md);
+            padding: 10px 10px 8px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform 0.06s ease;
+            position: relative;
+            text-align: center;
+        }
+        .unit-card:hover {
+            transform: translateY(-1px);
+        }
+        .unit-card .uphase {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin: 0 0 3px;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+        .unit-card .uno {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0 0 4px;
+            opacity: 0.85;
+        }
+        .unit-card .uaddr {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0 0 2px;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .unit-card .ustatus {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .unit-card .uflag {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--danger-600);
+        }
+        .unit-card .uflag.expired {
+            background: #E68A8A;
+            right: 16px;
+        }
 
-  .unit-card.vacant{background:var(--vacant-50);border:1px solid #000000;}
-  .unit-card.vacant .uno{color:var(--vacant-900);}
-  .unit-card.vacant .ustatus{color:var(--vacant-800);}
+        .unit-card.vacant {
+            background: var(--vacant-50);
+            border: 1px solid #000000;
+        }
+        .unit-card.vacant .uno {
+            color: var(--vacant-900);
+        }
+        .unit-card.vacant .ustatus {
+            color: var(--vacant-800);
+        }
 
-  .unit-card.vp{background:var(--vp-50);border:1px solid var(--vp-600);}
-  .unit-card.vp .uno{color:var(--vp-900);}
-  .unit-card.vp .ustatus{color:var(--vp-800);}
+        .unit-card.vp {
+            background: var(--vp-50);
+            border: 1px solid var(--vp-600);
+        }
+        .unit-card.vp .uno {
+            color: var(--vp-900);
+        }
+        .unit-card.vp .ustatus {
+            color: var(--vp-800);
+        }
 
-  .unit-card.renovation{background:var(--reno-50);border:1px solid var(--reno-600);}
-  .unit-card.renovation .uno{color:var(--reno-900);}
-  .unit-card.renovation .ustatus{color:var(--reno-800);}
+        .unit-card.renovation {
+            background: var(--reno-50);
+            border: 1px solid var(--reno-600);
+        }
+        .unit-card.renovation .uno {
+            color: var(--reno-900);
+        }
+        .unit-card.renovation .ustatus {
+            color: var(--reno-800);
+        }
 
-  .unit-card.movein{background:var(--movein-50);border:1px solid #22C55E;}
-  .unit-card.movein .uno{color:var(--movein-900);}
-  .unit-card.movein .ustatus{color:var(--movein-800);}
+        .unit-card.movein {
+            background: var(--movein-50);
+            border: 1px solid #22C55E;
+        }
+        .unit-card.movein .uno {
+            color: var(--movein-900);
+        }
+        .unit-card.movein .ustatus {
+            color: var(--movein-800);
+        }
 
-  .unit-card.expired-permit{border:2px solid #C94343;background:#FDEAEA;}
-  .unit-card.expired-permit .uno{color:#7A2424;}
-  .unit-card.expired-permit .ustatus{color:#962E2E;}
+        .unit-card.expired-permit {
+            border: 2px solid #C94343;
+            background: #FDEAEA;
+        }
+        .unit-card.expired-permit .uno {
+            color: #7A2424;
+        }
+        .unit-card.expired-permit .ustatus {
+            color: #962E2E;
+        }
 
-  .empty{
-    text-align:center;padding:50px 20px;color:var(--text-tertiary);font-size:13px;
-  }
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
 
-  .overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;
-  }
-  .overlay.show{display:flex;}
-  .modal{
-    background:var(--bg-card);border-radius:var(--radius-lg);padding:20px;width:100%;max-width:420px;max-height:85vh;overflow-y:auto;position:relative;
-  }
-  .modal h2{font-size:16px;font-weight:600;margin:0 0 14px;}
-  .modal label{display:block;font-size:12px;color:var(--text-secondary);margin:12px 0 4px;}
-  .modal select, .modal input[type=text], .modal textarea{
-    width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-md);font-size:13px;
-    background:var(--bg-card);color:var(--text-primary);font-family:inherit;resize:vertical;
-  }
-  .modal-actions{display:flex;gap:8px;margin-top:18px;}
-  .btn{
-    flex:1;padding:9px 12px;border-radius:var(--radius-md);font-size:13px;cursor:pointer;border:1px solid var(--border);
-    background:var(--bg-card);color:var(--text-primary);font-weight:500;
-  }
-  .btn.primary{background:var(--text-primary);color:var(--bg-card);border-color:var(--text-primary);}
-  .btn.danger-text{color:var(--danger-600);}
-  .close-x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--text-tertiary);font-size:18px;background:none;border:none;}
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            padding: 16px;
+        }
+        .overlay.show {
+            display: flex;
+        }
+        .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 14px;
+        }
+        .modal label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 12px 0 4px;
+        }
+        .modal select,
+        .modal input[type=text],
+        .modal textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: inherit;
+            resize: vertical;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .btn {
+            flex: 1;
+            padding: 9px 12px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .btn.primary {
+            background: var(--text-primary);
+            color: var(--bg-card);
+            border-color: var(--text-primary);
+        }
+        .btn.danger-text {
+            color: var(--danger-600);
+        }
+        .close-x {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            cursor: pointer;
+            color: var(--text-tertiary);
+            font-size: 18px;
+            background: none;
+            border: none;
+        }
 
-  .history-item{padding:8px 0;border-bottom:1px solid var(--border-soft);font-size:12px;}
-  .history-item:last-child{border-bottom:none;}
-  .history-item .h-status{font-weight:600;}
-  .history-item .h-meta{color:var(--text-tertiary);margin-top:2px;}
+        .history-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 12px;
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .history-item .h-status {
+            font-weight: 600;
+        }
+        .history-item .h-meta {
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
 
-  .inhouse-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;}
-  .inhouse-row input{flex:1;}
-  .inhouse-row button{border:none;background:none;color:var(--danger-600);cursor:pointer;font-size:12px;padding:4px 8px;}
+        .inhouse-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .inhouse-row input {
+            flex: 1;
+        }
+        .inhouse-row button {
+            border: none;
+            background: none;
+            color: var(--danger-600);
+            cursor: pointer;
+            font-size: 12px;
+            padding: 4px 8px;
+        }
 
-  .loading{text-align:center;padding:60px;color:var(--text-tertiary);font-size:13px;}
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
 
-  @media (max-width:520px){
-    .stats{grid-template-columns:repeat(2,1fr);}
-    .stats .stat-card:first-child{grid-column:1 / -1;}
-    .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
-  }
+        @media (max-width: 520px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats .stat-card:first-child {
+                grid-column: 1 / -1;
+            }
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
 
-  /* ── Site Map ── */
-  .sm-legend{display:flex;flex-wrap:wrap;gap:10px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:12px;}
-  .sm-leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-secondary);}
-  .sm-leg-dot{width:14px;height:14px;border-radius:3px;border:1.5px solid;flex-shrink:0;}
-  
-  .sm-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 12px;
-  }
-  
-  .sm-block-group {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 14px;
-  }
-  
-  .sm-block-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .sm-block-title .sm-count {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--text-tertiary);
-  }
-  
-  .sm-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  
-  .sm-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
-  }
-  
-  .sm-unit {
-    padding: 4px 5px;
-    border: 1.5px solid;
-    border-radius: 3px;
-    font-size: 9px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.3;
-    transition: opacity 0.15s;
-    min-width: 30px;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-  }
-  
-  .sm-unit:hover {
-    opacity: 0.7;
-    transform: scale(1.05);
-  }
-  
-  .sm-unit.corner-lot {
-    border-width: 2.5px;
-  }
-  
-  .sm-unit.end-lot {
-    border-style: dashed;
-  }
-  
-  .sm-notes {
-    margin-top: 16px;
-    padding: 12px 14px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-  
-  .sm-notes p {
-    margin: 4px 0;
-  }
+        /* ── Site Map PDF Viewer ── */
+        .sm-pdf-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 0;
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            min-height: 500px;
+            overflow: hidden;
+        }
+        .sm-pdf-container canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .sm-pdf-container .sm-pdf-placeholder {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+        .sm-pdf-container .sm-pdf-placeholder .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .sm-pdf-container .sm-pdf-placeholder .hint {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+        .sm-pdf-container .sm-pdf-page-wrap {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
 
-  @media (max-width: 768px) {
-    .sm-unit {
-      font-size: 7px;
-      min-width: 22px;
-      padding: 2px 3px;
-    }
-    .sm-row {
-      gap: 2px;
-    }
-  }
-</style>
+        .sm-notes {
+            margin-top: 16px;
+            padding: 12px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .sm-notes p {
+            margin: 4px 0;
+        }
+    </style>
 </head>
 <body>
 
-<div class="app" id="app">
-  <div class="loading" id="loading">Loading unit data…</div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-<script>
-const STATUS_DEFS = {
-  vacant:     { label: "Vacant Unit",            short: "Vacant Unit",       cls: "vacant"     },
-  vp:         { label: "Vacant Possession Unit", short: "VP Unit",           cls: "vp"         },
-  renovation: { label: "Vacant Renovation Unit", short: "Renovation Unit",   cls: "renovation" },
-  movein:     { label: "Move-in Unit",           short: "Move-in Unit",      cls: "movein"     }
-};
-
-const PHASES = {
-  phase1: {
-    label: "Phase 1",
-    title: "M Panora Phase 1",
-    total: 247,
-    storageKey: "phase1-units-v1",
-    addressMap: {"001":{"lot":150,"address":"60, Jalan M-Panora 1/1"},"002":{"lot":151,"address":"58, Jalan M-Panora 1/1"},"003":{"lot":152,"address":"56, Jalan M-Panora 1/1"},"004":{"lot":153,"address":"52A, Jalan M-Panora 1/1"},"005":{"lot":154,"address":"52, Jalan M-Panora 1/1"},"006":{"lot":155,"address":"50, Jalan M-Panora 1/1"},"007":{"lot":156,"address":"48, Jalan M-Panora 1/1"},"008":{"lot":157,"address":"46, Jalan M-Panora 1/1"},"009":{"lot":158,"address":"42A, Jalan M-Panora 1/1"},"010":{"lot":159,"address":"42, Jalan M-Panora 1/1"},"011":{"lot":160,"address":"40, Jalan M-Panora 1/1"},"012":{"lot":161,"address":"38, Jalan M-Panora 1/1"},"013":{"lot":162,"address":"36, Jalan M-Panora 1/1"},"014":{"lot":163,"address":"32A, Jalan M-Panora 1/1"},"015":{"lot":164,"address":"32, Jalan M-Panora 1/1"},"016":{"lot":165,"address":"30, Jalan M-Panora 1/1"},"017":{"lot":166,"address":"28, Jalan M-Panora 1/1"},"018":{"lot":167,"address":"26, Jalan M-Panora 1/1"},"019":{"lot":168,"address":"22A, Jalan M-Panora 1/1"},"020":{"lot":169,"address":"22, Jalan M-Panora 1/1"},"021":{"lot":170,"address":"20, Jalan M-Panora 1/1"},"022":{"lot":171,"address":"18, Jalan M-Panora 1/1"},"023":{"lot":172,"address":"16, Jalan M-Panora 1/1"},"024":{"lot":173,"address":"12A, Jalan M-Panora 1/1"},"025":{"lot":174,"address":"12, Jalan M-Panora 1/1"},"026":{"lot":175,"address":"10, Jalan M-Panora 1/1"},"027":{"lot":176,"address":"8, Jalan M-Panora 1/1"},"028":{"lot":177,"address":"6, Jalan M-Panora 1/1"},"029":{"lot":178,"address":"2A, Jalan M-Panora 1/1"},"030":{"lot":179,"address":"2, Jalan M-Panora 1/1"},"031":{"lot":180,"address":"1, Jalan M-Panora 1/1"},"032":{"lot":181,"address":"3, Jalan M-Panora 1/1"},"033":{"lot":182,"address":"5, Jalan M-Panora 1/1"},"034":{"lot":183,"address":"7, Jalan M-Panora 1/1"},"035":{"lot":184,"address":"9, Jalan M-Panora 1/1"},"036":{"lot":185,"address":"11, Jalan M-Panora 1/1"},"037":{"lot":186,"address":"13, Jalan M-Panora 1/1"},"038":{"lot":187,"address":"15, Jalan M-Panora 1/1"},"039":{"lot":188,"address":"17, Jalan M-Panora 1/1"},"040":{"lot":189,"address":"19, Jalan M-Panora 1/1"},"041":{"lot":190,"address":"21, Jalan M-Panora 1/1"},"042":{"lot":191,"address":"23, Jalan M-Panora 1/1"},"043":{"lot":192,"address":"25, Jalan M-Panora 1/1"},"044":{"lot":193,"address":"27, Jalan M-Panora 1/1"},"045":{"lot":194,"address":"29, Jalan M-Panora 1/1"},"046":{"lot":195,"address":"31, Jalan M-Panora 1/1"},"047":{"lot":196,"address":"33, Jalan M-Panora 1/1"},"048":{"lot":197,"address":"35, Jalan M-Panora 1/1"},"049":{"lot":198,"address":"37, Jalan M-Panora 1/1"},"050":{"lot":199,"address":"39, Jalan M-Panora 1/1"},"051":{"lot":200,"address":"41, Jalan M-Panora 1/1"},"052":{"lot":201,"address":"43, Jalan M-Panora 1/1"},"053":{"lot":202,"address":"45, Jalan M-Panora 1/1"},"054":{"lot":203,"address":"47, Jalan M-Panora 1/1"},"055":{"lot":"203A","address":"49, Jalan M-Panora 1/1"},"056":{"lot":205,"address":"51, Jalan M-Panora 1/1"},"057":{"lot":206,"address":"53, Jalan M-Panora 1/1"},"058":{"lot":207,"address":"55, Jalan M-Panora 1/1"},"059":{"lot":208,"address":"57, Jalan M-Panora 1/1"},"060":{"lot":209,"address":"59, Jalan M-Panora 1/1"},"061":{"lot":210,"address":"61, Jalan M-Panora 1/1"},"062":{"lot":211,"address":"63, Jalan M-Panora 1/1"},"063":{"lot":212,"address":"65, Jalan M-Panora 1/1"},"064":{"lot":213,"address":"72, Jalan M-Panora 1/2"},"065":{"lot":214,"address":"70, Jalan M-Panora 1/2"},"066":{"lot":215,"address":"68, Jalan M-Panora 1/2"},"067":{"lot":216,"address":"66, Jalan M-Panora 1/2"},"068":{"lot":217,"address":"62A, Jalan M-Panora 1/2"},"069":{"lot":218,"address":"62, Jalan M-Panora 1/2"},"070":{"lot":219,"address":"60, Jalan M-Panora 1/2"},"071":{"lot":220,"address":"58, Jalan M-Panora 1/2"},"072":{"lot":221,"address":"56, Jalan M-Panora 1/2"},"073":{"lot":222,"address":"52A, Jalan M-Panora 1/2"},"074":{"lot":223,"address":"52, Jalan M-Panora 1/2"},"075":{"lot":"223A","address":"50, Jalan M-Panora 1/2"},"076":{"lot":225,"address":"48, Jalan M-Panora 1/2"},"077":{"lot":226,"address":"46, Jalan M-Panora 1/2"},"078":{"lot":227,"address":"42A, Jalan M-Panora 1/2"},"079":{"lot":228,"address":"42, Jalan M-Panora 1/2"},"080":{"lot":229,"address":"40, Jalan M-Panora 1/2"},"081":{"lot":230,"address":"38, Jalan M-Panora 1/2"},"082":{"lot":231,"address":"36, Jalan M-Panora 1/2"},"083":{"lot":232,"address":"32A, Jalan M-Panora 1/2"},"084":{"lot":233,"address":"32, Jalan M-Panora 1/2"},"085":{"lot":234,"address":"30, Jalan M-Panora 1/2"},"086":{"lot":235,"address":"28, Jalan M-Panora 1/2"},"087":{"lot":236,"address":"26, Jalan M-Panora 1/2"},"088":{"lot":237,"address":"22A, Jalan M-Panora 1/2"},"089":{"lot":238,"address":"22, Jalan M-Panora 1/2"},"090":{"lot":239,"address":"20, Jalan M-Panora 1/2"},"091":{"lot":240,"address":"18, Jalan M-Panora 1/2"},"092":{"lot":241,"address":"16, Jalan M-Panora 1/2"},"093":{"lot":242,"address":"12A, Jalan M-Panora 1/2"},"094":{"lot":243,"address":"12, Jalan M-Panora 1/2"},"095":{"lot":244,"address":"10, Jalan M-Panora 1/2"},"096":{"lot":245,"address":"8, Jalan M-Panora 1/2"},"097":{"lot":246,"address":"6, Jalan M-Panora 1/2"},"098":{"lot":247,"address":"2A, Jalan M-Panora 1/2"},"099":{"lot":248,"address":"2, Jalan M-Panora 1/2"},"100":{"lot":249,"address":"1, Jalan M-Panora 1/2"},"101":{"lot":250,"address":"3, Jalan M-Panora 1/2"},"102":{"lot":251,"address":"5, Jalan M-Panora 1/2"},"103":{"lot":252,"address":"7, Jalan M-Panora 1/2"},"104":{"lot":253,"address":"9, Jalan M-Panora 1/2"},"105":{"lot":254,"address":"11, Jalan M-Panora 1/2"},"106":{"lot":255,"address":"13, Jalan M-Panora 1/2"},"107":{"lot":256,"address":"15, Jalan M-Panora 1/2"},"108":{"lot":257,"address":"17, Jalan M-Panora 1/2"},"109":{"lot":258,"address":"19, Jalan M-Panora 1/2"},"110":{"lot":259,"address":"21, Jalan M-Panora 1/2"},"111":{"lot":260,"address":"23, Jalan M-Panora 1/2"},"112":{"lot":261,"address":"25, Jalan M-Panora 1/2"},"113":{"lot":262,"address":"27, Jalan M-Panora 1/2"},"114":{"lot":263,"address":"29, Jalan M-Panora 1/2"},"115":{"lot":264,"address":"31, Jalan M-Panora 1/2"},"116":{"lot":265,"address":"33, Jalan M-Panora 1/2"},"117":{"lot":266,"address":"35, Jalan M-Panora 1/2"},"118":{"lot":267,"address":"37, Jalan M-Panora 1/2"},"119":{"lot":268,"address":"39, Jalan M-Panora 1/2"},"120":{"lot":269,"address":"41, Jalan M-Panora 1/2"},"121":{"lot":270,"address":"43, Jalan M-Panora 1/2"},"122":{"lot":271,"address":"45, Jalan M-Panora 1/2"},"123":{"lot":272,"address":"47, Jalan M-Panora 1/2"},"124":{"lot":273,"address":"49, Jalan M-Panora 1/2"},"125":{"lot":274,"address":"51, Jalan M-Panora 1/2"},"126":{"lot":275,"address":"53, Jalan M-Panora 1/2"},"127":{"lot":276,"address":"55, Jalan M-Panora 1/2"},"128":{"lot":277,"address":"57, Jalan M-Panora 1/2"},"129":{"lot":278,"address":"59, Jalan M-Panora 1/2"},"130":{"lot":279,"address":"61, Jalan M-Panora 1/2"},"131":{"lot":280,"address":"63, Jalan M-Panora 1/2"},"132":{"lot":281,"address":"65, Jalan M-Panora 1/2"},"133":{"lot":282,"address":"67, Jalan M-Panora 1/2"},"134":{"lot":283,"address":"69, Jalan M-Panora 1/2"},"135":{"lot":"283A","address":"71, Jalan M-Panora 1/2"},"136":{"lot":285,"address":"73, Jalan M-Panora 1/2"},"137":{"lot":286,"address":"75, Jalan M-Panora 1/2"},"138":{"lot":287,"address":"72, Jalan M-Panora 1/3"},"139":{"lot":288,"address":"70, Jalan M-Panora 1/3"},"140":{"lot":289,"address":"68, Jalan M-Panora 1/3"},"141":{"lot":290,"address":"66, Jalan M-Panora 1/3"},"142":{"lot":291,"address":"62A, Jalan M-Panora 1/3"},"143":{"lot":292,"address":"62, Jalan M-Panora 1/3"},"144":{"lot":293,"address":"60, Jalan M-Panora 1/3"},"145":{"lot":294,"address":"58, Jalan M-Panora 1/3"},"146":{"lot":295,"address":"56, Jalan M-Panora 1/3"},"147":{"lot":296,"address":"52A, Jalan M-Panora 1/3"},"148":{"lot":297,"address":"52, Jalan M-Panora 1/3"},"149":{"lot":298,"address":"50, Jalan M-Panora 1/3"},"150":{"lot":299,"address":"48, Jalan M-Panora 1/3"},"151":{"lot":300,"address":"46, Jalan M-Panora 1/3"},"152":{"lot":301,"address":"42A, Jalan M-Panora 1/3"},"153":{"lot":302,"address":"42, Jalan M-Panora 1/3"},"154":{"lot":303,"address":"40, Jalan M-Panora 1/3"},"155":{"lot":304,"address":"38, Jalan M-Panora 1/3"},"156":{"lot":305,"address":"36, Jalan M-Panora 1/3"},"157":{"lot":306,"address":"32A, Jalan M-Panora 1/3"},"158":{"lot":307,"address":"32, Jalan M-Panora 1/3"},"159":{"lot":308,"address":"30, Jalan M-Panora 1/3"},"160":{"lot":309,"address":"28, Jalan M-Panora 1/3"},"161":{"lot":310,"address":"26, Jalan M-Panora 1/3"},"162":{"lot":311,"address":"22A, Jalan M-Panora 1/3"},"163":{"lot":312,"address":"22, Jalan M-Panora 1/3"},"164":{"lot":313,"address":"20, Jalan M-Panora 1/3"},"165":{"lot":314,"address":"18, Jalan M-Panora 1/3"},"166":{"lot":315,"address":"16, Jalan M-Panora 1/3"},"167":{"lot":316,"address":"12A, Jalan M-Panora 1/3"},"168":{"lot":317,"address":"12, Jalan M-Panora 1/3"},"169":{"lot":318,"address":"10, Jalan M-Panora 1/3"},"170":{"lot":319,"address":"8, Jalan M-Panora 1/3"},"171":{"lot":320,"address":"6, Jalan M-Panora 1/3"},"172":{"lot":321,"address":"2A, Jalan M-Panora 1/3"},"173":{"lot":322,"address":"2, Jalan M-Panora 1/3"},"174":{"lot":323,"address":"1, Jalan M-Panora 1/4"},"175":{"lot":324,"address":"3, Jalan M-Panora 1/4"},"176":{"lot":325,"address":"5, Jalan M-Panora 1/4"},"177":{"lot":326,"address":"7, Jalan M-Panora 1/4"},"178":{"lot":327,"address":"9, Jalan M-Panora 1/4"},"179":{"lot":328,"address":"11, Jalan M-Panora 1/4"},"180":{"lot":329,"address":"13, Jalan M-Panora 1/4"},"181":{"lot":330,"address":"15, Jalan M-Panora 1/4"},"182":{"lot":331,"address":"17, Jalan M-Panora 1/4"},"183":{"lot":332,"address":"19, Jalan M-Panora 1/4"},"184":{"lot":333,"address":"21, Jalan M-Panora 1/4"},"185":{"lot":334,"address":"23, Jalan M-Panora 1/4"},"186":{"lot":335,"address":"25, Jalan M-Panora 1/4"},"187":{"lot":336,"address":"27, Jalan M-Panora 1/4"},"188":{"lot":337,"address":"29, Jalan M-Panora 1/4"},"189":{"lot":338,"address":"31, Jalan M-Panora 1/4"},"190":{"lot":339,"address":"33, Jalan M-Panora 1/4"},"191":{"lot":340,"address":"35, Jalan M-Panora 1/4"},"192":{"lot":341,"address":"37, Jalan M-Panora 1/4"},"193":{"lot":342,"address":"39, Jalan M-Panora 1/4"},"194":{"lot":343,"address":"41, Jalan M-Panora 1/4"},"195":{"lot":344,"address":"43, Jalan M-Panora 1/4"},"196":{"lot":345,"address":"45, Jalan M-Panora 1/4"},"197":{"lot":346,"address":"47, Jalan M-Panora 1/4"},"198":{"lot":347,"address":"48, Jalan M-Panora 1/5"},"199":{"lot":348,"address":"46, Jalan M-Panora 1/5"},"200":{"lot":349,"address":"42A, Jalan M-Panora 1/5"},"201":{"lot":350,"address":"42, Jalan M-Panora 1/5"},"202":{"lot":351,"address":"40, Jalan M-Panora 1/5"},"203":{"lot":352,"address":"38, Jalan M-Panora 1/5"},"204":{"lot":353,"address":"36, Jalan M-Panora 1/5"},"205":{"lot":354,"address":"32A, Jalan M-Panora 1/5"},"206":{"lot":355,"address":"32, Jalan M-Panora 1/5"},"207":{"lot":356,"address":"30, Jalan M-Panora 1/5"},"208":{"lot":357,"address":"28, Jalan M-Panora 1/5"},"209":{"lot":358,"address":"26, Jalan M-Panora 1/5"},"210":{"lot":359,"address":"22A, Jalan M-Panora 1/5"},"211":{"lot":360,"address":"22, Jalan M-Panora 1/5"},"212":{"lot":361,"address":"20, Jalan M-Panora 1/5"},"213":{"lot":362,"address":"18, Jalan M-Panora 1/5"},"214":{"lot":363,"address":"16, Jalan M-Panora 1/5"},"215":{"lot":364,"address":"12A, Jalan M-Panora 1/5"},"216":{"lot":365,"address":"12, Jalan M-Panora 1/5"},"217":{"lot":366,"address":"10, Jalan M-Panora 1/5"},"218":{"lot":367,"address":"8, Jalan M-Panora 1/5"},"219":{"lot":368,"address":"6, Jalan M-Panora 1/5"},"220":{"lot":369,"address":"2A, Jalan M-Panora 1/5"},"221":{"lot":370,"address":"2, Jalan M-Panora 1/5"},"222":{"lot":371,"address":"1, Jalan M-Panora 1/5"},"223":{"lot":372,"address":"3, Jalan M-Panora 1/5"},"224":{"lot":373,"address":"5, Jalan M-Panora 1/5"},"225":{"lot":374,"address":"7, Jalan M-Panora 1/5"},"226":{"lot":375,"address":"9, Jalan M-Panora 1/5"},"227":{"lot":376,"address":"11, Jalan M-Panora 1/5"},"228":{"lot":377,"address":"13, Jalan M-Panora 1/5"},"229":{"lot":378,"address":"15, Jalan M-Panora 1/5"},"230":{"lot":379,"address":"17, Jalan M-Panora 1/5"},"231":{"lot":380,"address":"19, Jalan M-Panora 1/5"},"232":{"lot":381,"address":"21, Jalan M-Panora 1/5"},"233":{"lot":382,"address":"23, Jalan M-Panora 1/5"},"234":{"lot":383,"address":"25, Jalan M-Panora 1/5"},"235":{"lot":384,"address":"27, Jalan M-Panora 1/5"},"236":{"lot":385,"address":"29, Jalan M-Panora 1/5"},"237":{"lot":386,"address":"31, Jalan M-Panora 1/5"},"238":{"lot":387,"address":"33, Jalan M-Panora 1/5"},"239":{"lot":388,"address":"35, Jalan M-Panora 1/5"},"240":{"lot":389,"address":"37, Jalan M-Panora 1/5"},"241":{"lot":390,"address":"39, Jalan M-Panora 1/5"},"242":{"lot":391,"address":"41, Jalan M-Panora 1/5"},"243":{"lot":392,"address":"43, Jalan M-Panora 1/5"},"244":{"lot":393,"address":"45, Jalan M-Panora 1/5"},"245":{"lot":394,"address":"47, Jalan M-Panora 1/5"},"246":{"lot":395,"address":"49, Jalan M-Panora 1/5"},"247":{"lot":396,"address":"51, Jalan M-Panora 1/5"}}
-  },
-  phase2: {
-    label: "Phase 2",
-    title: "M Panora Phase 2",
-    total: 149,
-    storageKey: "phase2-units-v1",
-    addressMap: {"001":{"lot":"1","address":"21, Jalan M-Panora 2/1"},"002":{"lot":"2","address":"19, Jalan M-Panora 2/1"},"003":{"lot":"3","address":"17, Jalan M-Panora 2/1"},"004":{"lot":"3A","address":"15, Jalan M-Panora 2/1"},"005":{"lot":"5","address":"13, Jalan M-Panora 2/1"},"006":{"lot":"6","address":"11, Jalan M-Panora 2/1"},"007":{"lot":"7","address":"9, Jalan M-Panora 2/1"},"008":{"lot":"8","address":"7, Jalan M-Panora 2/1"},"009":{"lot":"9","address":"5, Jalan M-Panora 2/1"},"010":{"lot":"10","address":"3, Jalan M-Panora 2/1"},"011":{"lot":"11","address":"1, Jalan M-Panora 2/1"},"012":{"lot":"12","address":"2, Jalan M-Panora 2/2"},"013":{"lot":"13","address":"2A, Jalan M-Panora 2/2"},"014":{"lot":"13A","address":"6, Jalan M-Panora 2/2"},"015":{"lot":"15","address":"8, Jalan M-Panora 2/2"},"016":{"lot":"16","address":"10, Jalan M-Panora 2/2"},"017":{"lot":"17","address":"12, Jalan M-Panora 2/2"},"018":{"lot":"18","address":"12A, Jalan M-Panora 2/2"},"019":{"lot":"19","address":"16, Jalan M-Panora 2/2"},"020":{"lot":"20","address":"18, Jalan M-Panora 2/2"},"021":{"lot":"21","address":"20, Jalan M-Panora 2/2"},"022":{"lot":"22","address":"22, Jalan M-Panora 2/2"},"023":{"lot":"23","address":"19, Jalan M-Panora 2/2"},"024":{"lot":"23A","address":"17, Jalan M-Panora 2/2"},"025":{"lot":"25","address":"15, Jalan M-Panora 2/2"},"026":{"lot":"26","address":"13, Jalan M-Panora 2/2"},"027":{"lot":"27","address":"11, Jalan M-Panora 2/2"},"028":{"lot":"28","address":"9, Jalan M-Panora 2/2"},"029":{"lot":"29","address":"7, Jalan M-Panora 2/2"},"030":{"lot":"30","address":"5, Jalan M-Panora 2/2"},"031":{"lot":"31","address":"3, Jalan M-Panora 2/2"},"032":{"lot":"32","address":"1, Jalan M-Panora 2/2"},"033":{"lot":"33","address":"2, Jalan M-Panora 2/3"},"034":{"lot":"33A","address":"2A, Jalan M-Panora 2/3"},"035":{"lot":"35","address":"6, Jalan M-Panora 2/3"},"036":{"lot":"36","address":"8, Jalan M-Panora 2/3"},"037":{"lot":"37","address":"10, Jalan M-Panora 2/3"},"038":{"lot":"38","address":"12, Jalan M-Panora 2/3"},"039":{"lot":"39","address":"12A, Jalan M-Panora 2/3"},"040":{"lot":"40","address":"16, Jalan M-Panora 2/3"},"041":{"lot":"41","address":"18, Jalan M-Panora 2/3"},"042":{"lot":"42","address":"20, Jalan M-Panora 2/3"},"043":{"lot":"43","address":"22, Jalan M-Panora 2/3"},"044":{"lot":"43A","address":"22A, Jalan M-Panora 2/3"},"045":{"lot":"45","address":"26, Jalan M-Panora 2/3"},"046":{"lot":"46","address":"28, Jalan M-Panora 2/3"},"047":{"lot":"47","address":"30, Jalan M-Panora 2/3"},"048":{"lot":"48","address":"32, Jalan M-Panora 2/3"},"049":{"lot":"49","address":"32A, Jalan M-Panora 2/3"},"050":{"lot":"50","address":"36, Jalan M-Panora 2/3"},"051":{"lot":"51","address":"38, Jalan M-Panora 2/3"},"052":{"lot":"52","address":"40, Jalan M-Panora 2/3"},"053":{"lot":"53","address":"42, Jalan M-Panora 2/3"},"054":{"lot":"53A","address":"42A, Jalan M-Panora 2/3"},"055":{"lot":"55","address":"46, Jalan M-Panora 2/3"},"056":{"lot":"56","address":"48, Jalan M-Panora 2/3"},"057":{"lot":"57","address":"50, Jalan M-Panora 2/3"},"058":{"lot":"58","address":"52, Jalan M-Panora 2/3"},"059":{"lot":"59","address":"53, Jalan M-Panora 2/3"},"060":{"lot":"60","address":"51, Jalan M-Panora 2/3"},"061":{"lot":"61","address":"49, Jalan M-Panora 2/3"},"062":{"lot":"62","address":"47, Jalan M-Panora 2/3"},"063":{"lot":"63","address":"45, Jalan M-Panora 2/3"},"064":{"lot":"63A","address":"43, Jalan M-Panora 2/3"},"065":{"lot":"65","address":"41, Jalan M-Panora 2/3"},"066":{"lot":"66","address":"39, Jalan M-Panora 2/3"},"067":{"lot":"67","address":"37, Jalan M-Panora 2/3"},"068":{"lot":"68","address":"35, Jalan M-Panora 2/3"},"069":{"lot":"69","address":"33, Jalan M-Panora 2/3"},"070":{"lot":"70","address":"31, Jalan M-Panora 2/3"},"071":{"lot":"71","address":"29, Jalan M-Panora 2/3"},"072":{"lot":"72","address":"27, Jalan M-Panora 2/3"},"073":{"lot":"73","address":"25, Jalan M-Panora 2/3"},"074":{"lot":"73A","address":"23, Jalan M-Panora 2/3"},"075":{"lot":"75","address":"21, Jalan M-Panora 2/3"},"076":{"lot":"76","address":"19, Jalan M-Panora 2/3"},"077":{"lot":"77","address":"17, Jalan M-Panora 2/3"},"078":{"lot":"78","address":"15, Jalan M-Panora 2/3"},"079":{"lot":"79","address":"13, Jalan M-Panora 2/3"},"080":{"lot":"80","address":"11, Jalan M-Panora 2/3"},"081":{"lot":"81","address":"9, Jalan M-Panora 2/3"},"082":{"lot":"82","address":"7, Jalan M-Panora 2/3"},"083":{"lot":"83","address":"5, Jalan M-Panora 2/3"},"084":{"lot":"83A","address":"3, Jalan M-Panora 2/3"},"085":{"lot":"85","address":"1, Jalan M-Panora 2/3"},"086":{"lot":"86","address":"2, Jalan M-Panora 2/4"},"087":{"lot":"87","address":"2A, Jalan M-Panora 2/4"},"088":{"lot":"88","address":"6, Jalan M-Panora 2/4"},"089":{"lot":"89","address":"8, Jalan M-Panora 2/4"},"090":{"lot":"90","address":"10, Jalan M-Panora 2/4"},"091":{"lot":"91","address":"12, Jalan M-Panora 2/4"},"092":{"lot":"92","address":"12A, Jalan M-Panora 2/4"},"093":{"lot":"93","address":"16, Jalan M-Panora 2/4"},"094":{"lot":"93A","address":"18, Jalan M-Panora 2/4"},"095":{"lot":"95","address":"20, Jalan M-Panora 2/4"},"096":{"lot":"96","address":"22, Jalan M-Panora 2/4"},"097":{"lot":"97","address":"22A, Jalan M-Panora 2/4"},"098":{"lot":"98","address":"26, Jalan M-Panora 2/4"},"099":{"lot":"99","address":"28, Jalan M-Panora 2/4"},"100":{"lot":"100","address":"30, Jalan M-Panora 2/4"},"101":{"lot":"101","address":"32, Jalan M-Panora 2/4"},"102":{"lot":"102","address":"32A, Jalan M-Panora 2/4"},"103":{"lot":"103","address":"36, Jalan M-Panora 2/4"},"104":{"lot":"103A","address":"38, Jalan M-Panora 2/4"},"105":{"lot":"105","address":"40, Jalan M-Panora 2/4"},"106":{"lot":"106","address":"42, Jalan M-Panora 2/4"},"107":{"lot":"107","address":"42A, Jalan M-Panora 2/4"},"108":{"lot":"108","address":"46, Jalan M-Panora 2/4"},"109":{"lot":"109","address":"48, Jalan M-Panora 2/4"},"110":{"lot":"110","address":"50, Jalan M-Panora 2/4"},"111":{"lot":"111","address":"52, Jalan M-Panora 2/4"},"112":{"lot":"112","address":"52A, Jalan M-Panora 2/4"},"113":{"lot":"113","address":"56, Jalan M-Panora 2/4"},"114":{"lot":"113A","address":"58, Jalan M-Panora 2/4"},"115":{"lot":"115","address":"69, Jalan M-Panora 2/4"},"116":{"lot":"116","address":"67, Jalan M-Panora 2/4"},"117":{"lot":"117","address":"65, Jalan M-Panora 2/4"},"118":{"lot":"118","address":"63, Jalan M-Panora 2/4"},"119":{"lot":"119","address":"61, Jalan M-Panora 2/4"},"120":{"lot":"120","address":"59, Jalan M-Panora 2/4"},"121":{"lot":"121","address":"57, Jalan M-Panora 2/4"},"122":{"lot":"122","address":"55, Jalan M-Panora 2/4"},"123":{"lot":"123","address":"53, Jalan M-Panora 2/4"},"124":{"lot":"123A","address":"51, Jalan M-Panora 2/4"},"125":{"lot":"125","address":"49, Jalan M-Panora 2/4"},"126":{"lot":"126","address":"47, Jalan M-Panora 2/4"},"127":{"lot":"127","address":"45, Jalan M-Panora 2/4"},"128":{"lot":"128","address":"43, Jalan M-Panora 2/4"},"129":{"lot":"129","address":"41, Jalan M-Panora 2/4"},"130":{"lot":"130","address":"39, Jalan M-Panora 2/4"},"131":{"lot":"131","address":"37, Jalan M-Panora 2/4"},"132":{"lot":"132","address":"35, Jalan M-Panora 2/4"},"133":{"lot":"133","address":"33, Jalan M-Panora 2/4"},"134":{"lot":"133A","address":"31, Jalan M-Panora 2/4"},"135":{"lot":"135","address":"29, Jalan M-Panora 2/4"},"136":{"lot":"136","address":"27, Jalan M-Panora 2/4"},"137":{"lot":"137","address":"25, Jalan M-Panora 2/4"},"138":{"lot":"138","address":"23, Jalan M-Panora 2/4"},"139":{"lot":"139","address":"21, Jalan M-Panora 2/4"},"140":{"lot":"140","address":"19, Jalan M-Panora 2/4"},"141":{"lot":"141","address":"17, Jalan M-Panora 2/4"},"142":{"lot":"142","address":"15, Jalan M-Panora 2/4"},"143":{"lot":"143","address":"13, Jalan M-Panora 2/4"},"144":{"lot":"143A","address":"11, Jalan M-Panora 2/4"},"145":{"lot":"145","address":"9, Jalan M-Panora 2/4"},"146":{"lot":"146","address":"7, Jalan M-Panora 2/4"},"147":{"lot":"147","address":"5, Jalan M-Panora 2/4"},"148":{"lot":"148","address":"3, Jalan M-Panora 2/4"},"149":{"lot":"149","address":"1, Jalan M-Panora 2/4"}}
-  }
-};
-const PHASE_KEYS = Object.keys(PHASES);
-const INHOUSE_KEY = "inhouse-list-v1";
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdOGOrUYl6_r7AuzlLISsVoVOZARw-3KjyaREDWP8LKjLZVIX5i2fVzDWq9exCtDn24w/exec";
-
-async function scriptGet(sheet, key) {
-  const url = `${SCRIPT_URL}?action=get&sheet=${encodeURIComponent(sheet)}`;
-  const res = await fetch(url);
-  const json = await res.json();
-  if (json.error) throw new Error(json.error);
-  return json.data && json.data[key] !== undefined ? json.data[key] : null;
-}
-
-async function scriptSet(sheet, key, value) {
-  const res = await fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain" },
-    body: JSON.stringify({ action: "set", sheet: sheet, key: key, value: value })
-  });
-  const json = await res.json();
-  if (json.error) throw new Error(json.error);
-  return json.success === true;
-}
-
-let state = {
-  activeTab: "all",
-  units: {},
-  inhouseList: [],
-  filter: "all",
-  search: "",
-  isAdmin: false
-};
-
-const ADMIN_PASSWORD = "admin123";
-
-function unitList(phaseKey) {
-  const total = PHASES[phaseKey].total;
-  const nums = [];
-  for (let i = 1; i <= total; i++) nums.push(String(i).padStart(3, "0"));
-  return nums;
-}
-
-function defaultUnitData() {
-  return { status: "vacant", updatedBy: "", updatedAt: "", permitExpiry: "", renovationNote: "", history: [] };
-}
-
-async function loadData() {
-  const phasePromise = Promise.all(PHASE_KEYS.map(async (phaseKey) => {
-    try {
-      const value = await scriptGet(phaseKey, "units");
-      return { phaseKey, data: value ? JSON.parse(value) : {} };
-    } catch (e) {
-      console.error("Load failed for", phaseKey, e);
-      return { phaseKey, data: {} };
-    }
-  }));
-
-  const inhousePromise = (async () => {
-    try {
-      const value = await scriptGet("inhouse", "list");
-      return value ? JSON.parse(value) : [];
-    } catch (e) {
-      console.error("Load failed for inhouse list", e);
-      return [];
-    }
-  })();
-
-  const [phaseResults, inhouseList] = await Promise.all([phasePromise, inhousePromise]);
-
-  phaseResults.forEach(({ phaseKey, data }) => {
-    state.units[phaseKey] = data;
-    unitList(phaseKey).forEach(no => {
-      if (!state.units[phaseKey][no]) state.units[phaseKey][no] = defaultUnitData();
-    });
-  });
-
-  state.inhouseList = inhouseList;
-}
-
-async function saveUnits(phaseKey, retries = 1) {
-  try {
-    const ok = await scriptSet(phaseKey, "units", JSON.stringify(state.units[phaseKey]));
-    if (!ok) throw new Error("Script returned no success");
-    return true;
-  } catch (e) {
-    console.error("Save failed", e);
-    if (retries > 0) {
-      await new Promise(r => setTimeout(r, 600));
-      return saveUnits(phaseKey, retries - 1);
-    }
-    alert("Could not save this change. The server may be temporarily unavailable — please wait a few seconds and try again. If this keeps happening, let your administrator know.");
-    return false;
-  }
-}
-
-async function saveInhouse(retries = 1) {
-  try {
-    const ok = await scriptSet("inhouse", "list", JSON.stringify(state.inhouseList));
-    if (!ok) throw new Error("Script returned no success");
-    return true;
-  } catch (e) {
-    console.error("Save failed", e);
-    if (retries > 0) {
-      await new Promise(r => setTimeout(r, 600));
-      return saveInhouse(retries - 1);
-    }
-    alert("Could not save the in-house list. Please try again in a moment.");
-    return false;
-  }
-}
-
-function isMismatch(phaseKey, unitNo) {
-  const u = state.units[phaseKey][unitNo];
-  return u.status === "renovation" && !(u.history || []).some(h => h.status === "vp");
-}
-
-function isExpiredPermit(phaseKey, unitNo) {
-  const u = state.units[phaseKey][unitNo];
-  if (u.status !== "renovation" || !u.permitExpiry) return false;
-  const today = new Date().toISOString().slice(0, 10);
-  return u.permitExpiry < today;
-}
-
-function formatDate(iso) {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) + " " +
-         d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
-}
-
-function formatPermitDate(dateStr) {
-  if (!dateStr) return "";
-  const parts = dateStr.split("-");
-  if (parts.length !== 3) return dateStr;
-  const [yyyy, mm, dd] = parts;
-  return `${dd}.${mm}.${yyyy.slice(2)}`;
-}
-
-function computeCounts(phaseKey) {
-  const units = unitList(phaseKey);
-  const counts = { vacant: 0, vp: 0, renovation: 0, movein: 0 };
-  let mismatchCount = 0, expiredCount = 0;
-  const mismatchUnits = [], expiredUnits = [];
-  units.forEach(no => {
-    counts[state.units[phaseKey][no].status]++;
-    if (isMismatch(phaseKey, no)) { mismatchCount++; mismatchUnits.push(no); }
-    if (isExpiredPermit(phaseKey, no)) { expiredCount++; expiredUnits.push(no); }
-  });
-  return { counts, mismatchCount, expiredCount, mismatchUnits, expiredUnits, total: units.length };
-}
-
-function unitLabel(phaseKey, no) {
-  const addr = PHASES[phaseKey].addressMap[no];
-  return { lot: (addr && addr.lot) || no, address: (addr && addr.address) || "" };
-}
-
-function streetName(address) {
-  const m = String(address).match(/Jalan M-Panora \d+\/\d+/);
-  return m ? m[0] : "Other";
-}
-
-function houseNumber(address) {
-  return String(address).split(",")[0].trim();
-}
-
-function streetSortKey(street) {
-  const m = street.match(/(\d+)\/(\d+)/);
-  if (!m) return [99, 99];
-  return [parseInt(m[1]), parseInt(m[2])];
-}
-
-function renderUnitCard(phaseKey, no, isAll) {
-  const u = state.units[phaseKey][no];
-  const def = STATUS_DEFS[u.status];
-  const { lot, address } = unitLabel(phaseKey, no);
-  const mismatch = isMismatch(phaseKey, no);
-  const expired = isExpiredPermit(phaseKey, no);
-  return `
-    <div class="unit-card ${def.cls}${expired ? ' expired-permit' : ''}" data-phase="${phaseKey}" data-unit="${no}">
-      ${mismatch ? '<span class="uflag" title="Renovation flagged without VP on record"></span>' : ''}
-      ${expired ? '<span class="uflag expired" title="Renovation permit expired"></span>' : ''}
-      ${isAll ? `<div class="uphase">${PHASES[phaseKey].label}</div>` : ''}
-      <div class="uaddr">${address}</div>
-      <div class="uno">P-${lot}</div>
-      <div class="ustatus">${expired ? `Work Permit Expired on ${formatPermitDate(u.permitExpiry)}` : `${def.short}${u.status === 'renovation' && u.permitExpiry ? ` · til ${formatPermitDate(u.permitExpiry)}` : ''}`}</div>
-    </div>
-  `;
-}
-
-// ── Site Map Layout Configuration ──
-// Based on the actual site plan:
-// Each block has: phase, street, rows, cols, startKey, endKey
-// The layout shows units arranged in rows with corner lots at each end
-const SITE_LAYOUT = [
-  // Phase 1
-  { phase: "phase1", street: "Jalan M-Panora 1/1", rows: 1, cols: 30, startKey: "001", endKey: "030" },
-  { phase: "phase1", street: "Jalan M-Panora 1/1", rows: 1, cols: 33, startKey: "031", endKey: "063" },
-  { phase: "phase1", street: "Jalan M-Panora 1/2", rows: 1, cols: 36, startKey: "064", endKey: "099" },
-  { phase: "phase1", street: "Jalan M-Panora 1/2", rows: 1, cols: 38, startKey: "100", endKey: "137" },
-  { phase: "phase1", street: "Jalan M-Panora 1/3", rows: 1, cols: 36, startKey: "138", endKey: "173" },
-  { phase: "phase1", street: "Jalan M-Panora 1/4", rows: 1, cols: 24, startKey: "174", endKey: "197" },
-  { phase: "phase1", street: "Jalan M-Panora 1/5", rows: 1, cols: 24, startKey: "198", endKey: "221" },
-  { phase: "phase1", street: "Jalan M-Panora 1/5", rows: 1, cols: 26, startKey: "222", endKey: "247" },
-  // Phase 2
-  { phase: "phase2", street: "Jalan M-Panora 2/1", rows: 1, cols: 11, startKey: "001", endKey: "011" },
-  { phase: "phase2", street: "Jalan M-Panora 2/2", rows: 1, cols: 11, startKey: "012", endKey: "022" },
-  { phase: "phase2", street: "Jalan M-Panora 2/2", rows: 1, cols: 10, startKey: "023", endKey: "032" },
-  { phase: "phase2", street: "Jalan M-Panora 2/3", rows: 1, cols: 26, startKey: "033", endKey: "058" },
-  { phase: "phase2", street: "Jalan M-Panora 2/3", rows: 1, cols: 27, startKey: "059", endKey: "085" },
-  { phase: "phase2", street: "Jalan M-Panora 2/4", rows: 1, cols: 28, startKey: "086", endKey: "113A" },
-  { phase: "phase2", street: "Jalan M-Panora 2/4", rows: 1, cols: 35, startKey: "115", endKey: "149" },
-];
-
-const STATUS_COLORS = {
-  vacant:     { bg: "#EDEBE4", border: "#888780", text: "#444441" },
-  vp:         { bg: "#FFF9D6", border: "#C9A400", text: "#705C00" },
-  renovation: { bg: "#E1EEFD", border: "#1768D1", text: "#0D4A99" },
-  movein:     { bg: "#E1F5EE", border: "#22C55E", text: "#085041" },
-};
-
-// Helper to get all unit keys in a range (handles numeric and alphanumeric like "113A")
-function getUnitKeysInRange(startKey, endKey, phase) {
-  const keys = [];
-  const addrMap = PHASES[phase].addressMap;
-  const allKeys = Object.keys(addrMap).sort((a, b) => {
-    // Sort numerically, handling alphanumeric like "113A"
-    const aNum = parseInt(a);
-    const bNum = parseInt(b);
-    if (aNum !== bNum) return aNum - bNum;
-    return a.localeCompare(b);
-  });
-  
-  let found = false;
-  for (const key of allKeys) {
-    if (key === startKey) found = true;
-    if (found) keys.push(key);
-    if (key === endKey) break;
-  }
-  return keys;
-}
-
-function renderSiteMap() {
-  const app = document.getElementById("app");
-
-  function getUnitStatus(phaseKey, key) {
-    const u = state.units[phaseKey] && state.units[phaseKey][key];
-    return u ? u.status : "vacant";
-  }
-
-  function getLotNumber(phaseKey, key) {
-    const addrMap = PHASES[phaseKey].addressMap;
-    return addrMap[key] ? addrMap[key].lot : key;
-  }
-
-  function isUnitExpired(phaseKey, key) {
-    const u = state.units[phaseKey] && state.units[phaseKey][key];
-    if (!u || u.status !== "renovation" || !u.permitExpiry) return false;
-    const [d, m, y] = (u.permitExpiry || "").split("-");
-    return y && new Date(y, m - 1, d) < new Date();
-  }
-
-  function getUnitAddress(phaseKey, key) {
-    const addrMap = PHASES[phaseKey].addressMap;
-    return addrMap[key] ? addrMap[key].address : "";
-  }
-
-  // Build the grid HTML for each block
-  let blocksHtml = '';
-  SITE_LAYOUT.forEach(block => {
-    const { phase, street, rows, cols, startKey, endKey } = block;
-    
-    // Get all unit keys in this block
-    const unitKeys = getUnitKeysInRange(startKey, endKey, phase);
-    
-    // Build rows
-    let gridHtml = '';
-    const perRow = Math.ceil(unitKeys.length / rows);
-    
-    for (let r = 0; r < rows; r++) {
-      gridHtml += `<div class="sm-row">`;
-      const startIdx = r * perRow;
-      const endIdx = Math.min(startIdx + perRow, unitKeys.length);
-      
-      for (let i = startIdx; i < endIdx; i++) {
-        const key = unitKeys[i];
-        if (!key) continue;
-        
-        const status = getUnitStatus(phase, key);
-        const lot = getLotNumber(phase, key);
-        const expired = isUnitExpired(phase, key);
-        const address = getUnitAddress(phase, key);
-        const colors = STATUS_COLORS[status] || STATUS_COLORS.vacant;
-        const bg = expired ? "#FDEAEA" : colors.bg;
-        const border = expired ? "#C94343" : colors.border;
-        const textColor = expired ? "#7A2424" : colors.text;
-        
-        // Check if this is a corner lot (first or last in the block)
-        const isCorner = (i === startIdx) || (i === endIdx - 1);
-        const cornerClass = isCorner ? ' corner-lot' : '';
-        
-        gridHtml += `<div class="sm-unit${cornerClass}" 
-          style="background:${bg};border-color:${border};color:${textColor}"
-          data-phase="${phase}" 
-          data-unit="${key}"
-          title="P-${lot} · ${address}${isCorner ? ' (Corner Lot)' : ''}">
-          ${lot}
-        </div>`;
-      }
-      gridHtml += `</div>`;
-    }
-
-    blocksHtml += `
-      <div class="sm-block-group">
-        <div class="sm-block-title">
-          <span>${street}</span>
-          <span class="sm-count">${unitKeys.length} units</span>
-        </div>
-        <div class="sm-grid">
-          ${gridHtml}
-        </div>
-      </div>
-    `;
-  });
-
-  const html = `
-    <div class="masthead">
-      <div class="masthead-left">
-        <span class="app-title">GatekeeperGo</span>
-        <span class="app-sub">M Panora Unit Status Tracker</span>
-      </div>
-      <div class="masthead-right">
-        ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
-        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
-      </div>
+    <div class="app" id="app">
+        <div class="loading" id="loading">Loading unit data…</div>
     </div>
 
-    <div class="tabs">
-      <button class="tab-btn" data-tab="all">ALL</button>
-      ${PHASE_KEYS.map(pk => `<button class="tab-btn" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
-      <button class="tab-btn active" data-tab="sitemap">Site Map</button>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js">
+    </script>
+    <script>
+        // ── Ensure DOMPurify is available ──
+        if (typeof DOMPurify === 'undefined') {
+            var DOMPurify = { sanitize: function(s) { return s; } };
+        }
 
-    <div class="sm-legend">
-      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#EDEBE4;border-color:#888780"></span>Vacant</span>
-      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#FFF9D6;border-color:#C9A400"></span>VP (Vacant Possession)</span>
-      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#E1EEFD;border-color:#1768D1"></span>Renovation</span>
-      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#E1F5EE;border-color:#22C55E"></span>Move-in</span>
-      <span class="sm-leg-item"><span class="sm-leg-dot" style="background:#FDEAEA;border-color:#C94343"></span>Expired Permit</span>
-      <span class="sm-leg-item" style="font-weight:600;color:var(--text-primary);">
-        <span style="width:14px;height:14px;border:2.5px solid #000;display:inline-block;border-radius:3px;"></span>
-        Corner Lot
-      </span>
-    </div>
+        // ── Status Definitions ──
+        const STATUS_DEFS = {
+            vacant: { label: "Vacant Unit", short: "Vacant Unit", cls: "vacant" },
+            vp: { label: "Vacant Possession Unit", short: "VP Unit", cls: "vp" },
+            renovation: { label: "Vacant Renovation Unit", short: "Renovation Unit", cls: "renovation" },
+            movein: { label: "Move-in Unit", short: "Move-in Unit", cls: "movein" }
+        };
 
-    <div class="sm-container">
-      ${blocksHtml}
-    </div>
+        // ── Phases ──
+        const PHASES = {
+            phase1: {
+                label: "Phase 1",
+                title: "M Panora Phase 1",
+                total: 247,
+                storageKey: "phase1-units-v1",
+                addressMap: { "001": { "lot": 150, "address": "60, Jalan M-Panora 1/1" }, "002": { "lot": 151,
+                        "address": "58, Jalan M-Panora 1/1" }, "003": { "lot": 152, "address": "56, Jalan M-Panora 1/1" },
+                    "004": { "lot": 153, "address": "52A, Jalan M-Panora 1/1" }, "005": { "lot": 154,
+                        "address": "52, Jalan M-Panora 1/1" }, "006": { "lot": 155, "address": "50, Jalan M-Panora 1/1" },
+                    "007": { "lot": 156, "address": "48, Jalan M-Panora 1/1" }, "008": { "lot": 157,
+                        "address": "46, Jalan M-Panora 1/1" }, "009": { "lot": 158, "address": "42A, Jalan M-Panora 1/1" },
+                    "010": { "lot": 159, "address": "42, Jalan M-Panora 1/1" }, "011": { "lot": 160,
+                        "address": "40, Jalan M-Panora 1/1" }, "012": { "lot": 161, "address": "38, Jalan M-Panora 1/1" },
+                    "013": { "lot": 162, "address": "36, Jalan M-Panora 1/1" }, "014": { "lot": 163,
+                        "address": "32A, Jalan M-Panora 1/1" }, "015": { "lot": 164, "address": "32, Jalan M-Panora 1/1" },
+                    "016": { "lot": 165, "address": "30, Jalan M-Panora 1/1" }, "017": { "lot": 166,
+                        "address": "28, Jalan M-Panora 1/1" }, "018": { "lot": 167, "address": "26, Jalan M-Panora 1/1" },
+                    "019": { "lot": 168, "address": "22A, Jalan M-Panora 1/1" }, "020": { "lot": 169,
+                        "address": "22, Jalan M-Panora 1/1" }, "021": { "lot": 170, "address": "20, Jalan M-Panora 1/1" },
+                    "022": { "lot": 171, "address": "18, Jalan M-Panora 1/1" }, "023": { "lot": 172,
+                        "address": "16, Jalan M-Panora 1/1" }, "024": { "lot": 173, "address": "12A, Jalan M-Panora 1/1" },
+                    "025": { "lot": 174, "address": "12, Jalan M-Panora 1/1" }, "026": { "lot": 175,
+                        "address": "10, Jalan M-Panora 1/1" }, "027": { "lot": 176, "address": "8, Jalan M-Panora 1/1" },
+                    "028": { "lot": 177, "address": "6, Jalan M-Panora 1/1" }, "029": { "lot": 178,
+                        "address": "2A, Jalan M-Panora 1/1" }, "030": { "lot": 179, "address": "2, Jalan M-Panora 1/1" },
+                    "031": { "lot": 180, "address": "1, Jalan M-Panora 1/1" }, "032": { "lot": 181,
+                        "address": "3, Jalan M-Panora 1/1" }, "033": { "lot": 182, "address": "5, Jalan M-Panora 1/1" },
+                    "034": { "lot": 183, "address": "7, Jalan M-Panora 1/1" }, "035": { "lot": 184,
+                        "address": "9, Jalan M-Panora 1/1" }, "036": { "lot": 185, "address": "11, Jalan M-Panora 1/1" },
+                    "037": { "lot": 186, "address": "13, Jalan M-Panora 1/1" }, "038": { "lot": 187,
+                        "address": "15, Jalan M-Panora 1/1" }, "039": { "lot": 188, "address": "17, Jalan M-Panora 1/1" },
+                    "040": { "lot": 189, "address": "19, Jalan M-Panora 1/1" }, "041": { "lot": 190,
+                        "address": "21, Jalan M-Panora 1/1" }, "042": { "lot": 191, "address": "23, Jalan M-Panora 1/1" },
+                    "043": { "lot": 192, "address": "25, Jalan M-Panora 1/1" }, "044": { "lot": 193,
+                        "address": "27, Jalan M-Panora 1/1" }, "045": { "lot": 194, "address": "29, Jalan M-Panora 1/1" },
+                    "046": { "lot": 195, "address": "31, Jalan M-Panora 1/1" }, "047": { "lot": 196,
+                        "address": "33, Jalan M-Panora 1/1" }, "048": { "lot": 197, "address": "35, Jalan M-Panora 1/1" },
+                    "049": { "lot": 198, "address": "37, Jalan M-Panora 1/1" }, "050": { "lot": 199,
+                        "address": "39, Jalan M-Panora 1/1" }, "051": { "lot": 200, "address": "41, Jalan M-Panora 1/1" },
+                    "052": { "lot": 201, "address": "43, Jalan M-Panora 1/1" }, "053": { "lot": 202,
+                        "address": "45, Jalan M-Panora 1/1" }, "054": { "lot": 203, "address": "47, Jalan M-Panora 1/1" },
+                    "055": { "lot": "203A", "address": "49, Jalan M-Panora 1/1" }, "056": { "lot": 205,
+                        "address": "51, Jalan M-Panora 1/1" }, "057": { "lot": 206, "address": "53, Jalan M-Panora 1/1" },
+                    "058": { "lot": 207, "address": "55, Jalan M-Panora 1/1" }, "059": { "lot": 208,
+                        "address": "57, Jalan M-Panora 1/1" }, "060": { "lot": 209, "address": "59, Jalan M-Panora 1/1" },
+                    "061": { "lot": 210, "address": "61, Jalan M-Panora 1/1" }, "062": { "lot": 211,
+                        "address": "63, Jalan M-Panora 1/1" }, "063": { "lot": 212, "address": "65, Jalan M-Panora 1/1" },
+                    "064": { "lot": 213, "address": "72, Jalan M-Panora 1/2" }, "065": { "lot": 214,
+                        "address": "70, Jalan M-Panora 1/2" }, "066": { "lot": 215, "address": "68, Jalan M-Panora 1/2" },
+                    "067": { "lot": 216, "address": "66, Jalan M-Panora 1/2" }, "068": { "lot": 217,
+                        "address": "62A, Jalan M-Panora 1/2" }, "069": { "lot": 218, "address": "62, Jalan M-Panora 1/2" },
+                    "070": { "lot": 219, "address": "60, Jalan M-Panora 1/2" }, "071": { "lot": 220,
+                        "address": "58, Jalan M-Panora 1/2" }, "072": { "lot": 221, "address": "56, Jalan M-Panora 1/2" },
+                    "073": { "lot": 222, "address": "52A, Jalan M-Panora 1/2" }, "074": { "lot": 223,
+                        "address": "52, Jalan M-Panora 1/2" }, "075": { "lot": "223A", "address": "50, Jalan M-Panora 1/2" },
+                    "076": { "lot": 225, "address": "48, Jalan M-Panora 1/2" }, "077": { "lot": 226,
+                        "address": "46, Jalan M-Panora 1/2" }, "078": { "lot": 227, "address": "42A, Jalan M-Panora 1/2" },
+                    "079": { "lot": 228, "address": "42, Jalan M-Panora 1/2" }, "080": { "lot": 229,
+                        "address": "40, Jalan M-Panora 1/2" }, "081": { "lot": 230, "address": "38, Jalan M-Panora 1/2" },
+                    "082": { "lot": 231, "address": "36, Jalan M-Panora 1/2" }, "083": { "lot": 232,
+                        "address": "32A, Jalan M-Panora 1/2" }, "084": { "lot": 233, "address": "32, Jalan M-Panora 1/2" },
+                    "085": { "lot": 234, "address": "30, Jalan M-Panora 1/2" }, "086": { "lot": 235,
+                        "address": "28, Jalan M-Panora 1/2" }, "087": { "lot": 236, "address": "26, Jalan M-Panora 1/2" },
+                    "088": { "lot": 237, "address": "22A, Jalan M-Panora 1/2" }, "089": { "lot": 238,
+                        "address": "22, Jalan M-Panora 1/2" }, "090": { "lot": 239, "address": "20, Jalan M-Panora 1/2" },
+                    "091": { "lot": 240, "address": "18, Jalan M-Panora 1/2" }, "092": { "lot": 241,
+                        "address": "16, Jalan M-Panora 1/2" }, "093": { "lot": 242, "address": "12A, Jalan M-Panora 1/2" },
+                    "094": { "lot": 243, "address": "12, Jalan M-Panora 1/2" }, "095": { "lot": 244,
+                        "address": "10, Jalan M-Panora 1/2" }, "096": { "lot": 245, "address": "8, Jalan M-Panora 1/2" },
+                    "097": { "lot": 246, "address": "6, Jalan M-Panora 1/2" }, "098": { "lot": 247,
+                        "address": "2A, Jalan M-Panora 1/2" }, "099": { "lot": 248, "address": "2, Jalan M-Panora 1/2" },
+                    "100": { "lot": 249, "address": "1, Jalan M-Panora 1/2" }, "101": { "lot": 250,
+                        "address": "3, Jalan M-Panora 1/2" }, "102": { "lot": 251, "address": "5, Jalan M-Panora 1/2" },
+                    "103": { "lot": 252, "address": "7, Jalan M-Panora 1/2" }, "104": { "lot": 253,
+                        "address": "9, Jalan M-Panora 1/2" }, "105": { "lot": 254, "address": "11, Jalan M-Panora 1/2" },
+                    "106": { "lot": 255, "address": "13, Jalan M-Panora 1/2" }, "107": { "lot": 256,
+                        "address": "15, Jalan M-Panora 1/2" }, "108": { "lot": 257, "address": "17, Jalan M-Panora 1/2" },
+                    "109": { "lot": 258, "address": "19, Jalan M-Panora 1/2" }, "110": { "lot": 259,
+                        "address": "21, Jalan M-Panora 1/2" }, "111": { "lot": 260, "address": "23, Jalan M-Panora 1/2" },
+                    "112": { "lot": 261, "address": "25, Jalan M-Panora 1/2" }, "113": { "lot": 262,
+                        "address": "27, Jalan M-Panora 1/2" }, "114": { "lot": 263, "address": "29, Jalan M-Panora 1/2" },
+                    "115": { "lot": 264, "address": "31, Jalan M-Panora 1/2" }, "116": { "lot": 265,
+                        "address": "33, Jalan M-Panora 1/2" }, "117": { "lot": 266, "address": "35, Jalan M-Panora 1/2" },
+                    "118": { "lot": 267, "address": "37, Jalan M-Panora 1/2" }, "119": { "lot": 268,
+                        "address": "39, Jalan M-Panora 1/2" }, "120": { "lot": 269, "address": "41, Jalan M-Panora 1/2" },
+                    "121": { "lot": 270, "address": "43, Jalan M-Panora 1/2" }, "122": { "lot": 271,
+                        "address": "45, Jalan M-Panora 1/2" }, "123": { "lot": 272, "address": "47, Jalan M-Panora 1/2" },
+                    "124": { "lot": 273, "address": "49, Jalan M-Panora 1/2" }, "125": { "lot": 274,
+                        "address": "51, Jalan M-Panora 1/2" }, "126": { "lot": 275, "address": "53, Jalan M-Panora 1/2" },
+                    "127": { "lot": 276, "address": "55, Jalan M-Panora 1/2" }, "128": { "lot": 277,
+                        "address": "57, Jalan M-Panora 1/2" }, "129": { "lot": 278, "address": "59, Jalan M-Panora 1/2" },
+                    "130": { "lot": 279, "address": "61, Jalan M-Panora 1/2" }, "131": { "lot": 280,
+                        "address": "63, Jalan M-Panora 1/2" }, "132": { "lot": 281, "address": "65, Jalan M-Panora 1/2" },
+                    "133": { "lot": 282, "address": "67, Jalan M-Panora 1/2" }, "134": { "lot": 283,
+                        "address": "69, Jalan M-Panora 1/2" }, "135": { "lot": "283A", "address": "71, Jalan M-Panora 1/2" },
+                    "136": { "lot": 285, "address": "73, Jalan M-Panora 1/2" }, "137": { "lot": 286,
+                        "address": "75, Jalan M-Panora 1/2" }, "138": { "lot": 287, "address": "72, Jalan M-Panora 1/3" },
+                    "139": { "lot": 288, "address": "70, Jalan M-Panora 1/3" }, "140": { "lot": 289,
+                        "address": "68, Jalan M-Panora 1/3" }, "141": { "lot": 290, "address": "66, Jalan M-Panora 1/3" },
+                    "142": { "lot": 291, "address": "62A, Jalan M-Panora 1/3" }, "143": { "lot": 292,
+                        "address": "62, Jalan M-Panora 1/3" }, "144": { "lot": 293, "address": "60, Jalan M-Panora 1/3" },
+                    "145": { "lot": 294, "address": "58, Jalan M-Panora 1/3" }, "146": { "lot": 295,
+                        "address": "56, Jalan M-Panora 1/3" }, "147": { "lot": 296, "address": "52A, Jalan M-Panora 1/3" },
+                    "148": { "lot": 297, "address": "52, Jalan M-Panora 1/3" }, "149": { "lot": 298,
+                        "address": "50, Jalan M-Panora 1/3" }, "150": { "lot": 299, "address": "48, Jalan M-Panora 1/3" },
+                    "151": { "lot": 300, "address": "46, Jalan M-Panora 1/3" }, "152": { "lot": 301,
+                        "address": "42A, Jalan M-Panora 1/3" }, "153": { "lot": 302, "address": "42, Jalan M-Panora 1/3" },
+                    "154": { "lot": 303, "address": "40, Jalan M-Panora 1/3" }, "155": { "lot": 304,
+                        "address": "38, Jalan M-Panora 1/3" }, "156": { "lot": 305, "address": "36, Jalan M-Panora 1/3" },
+                    "157": { "lot": 306, "address": "32A, Jalan M-Panora 1/3" }, "158": { "lot": 307,
+                        "address": "32, Jalan M-Panora 1/3" }, "159": { "lot": 308, "address": "30, Jalan M-Panora 1/3" },
+                    "160": { "lot": 309, "address": "28, Jalan M-Panora 1/3" }, "161": { "lot": 310,
+                        "address": "26, Jalan M-Panora 1/3" }, "162": { "lot": 311, "address": "22A, Jalan M-Panora 1/3" },
+                    "163": { "lot": 312, "address": "22, Jalan M-Panora 1/3" }, "164": { "lot": 313,
+                        "address": "20, Jalan M-Panora 1/3" }, "165": { "lot": 314, "address": "18, Jalan M-Panora 1/3" },
+                    "166": { "lot": 315, "address": "16, Jalan M-Panora 1/3" }, "167": { "lot": 316,
+                        "address": "12A, Jalan M-Panora 1/3" }, "168": { "lot": 317, "address": "12, Jalan M-Panora 1/3" },
+                    "169": { "lot": 318, "address": "10, Jalan M-Panora 1/3" }, "170": { "lot": 319,
+                        "address": "8, Jalan M-Panora 1/3" }, "171": { "lot": 320, "address": "6, Jalan M-Panora 1/3" },
+                    "172": { "lot": 321, "address": "2A, Jalan M-Panora 1/3" }, "173": { "lot": 322,
+                        "address": "2, Jalan M-Panora 1/3" }, "174": { "lot": 323, "address": "1, Jalan M-Panora 1/4" },
+                    "175": { "lot": 324, "address": "3, Jalan M-Panora 1/4" }, "176": { "lot": 325,
+                        "address": "5, Jalan M-Panora 1/4" }, "177": { "lot": 326, "address": "7, Jalan M-Panora 1/4" },
+                    "178": { "lot": 327, "address": "9, Jalan M-Panora 1/4" }, "179": { "lot": 328,
+                        "address": "11, Jalan M-Panora 1/4" }, "180": { "lot": 329, "address": "13, Jalan M-Panora 1/4" },
+                    "181": { "lot": 330, "address": "15, Jalan M-Panora 1/4" }, "182": { "lot": 331,
+                        "address": "17, Jalan M-Panora 1/4" }, "183": { "lot": 332, "address": "19, Jalan M-Panora 1/4" },
+                    "184": { "lot": 333, "address": "21, Jalan M-Panora 1/4" }, "185": { "lot": 334,
+                        "address": "23, Jalan M-Panora 1/4" }, "186": { "lot": 335, "address": "25, Jalan M-Panora 1/4" },
+                    "187": { "lot": 336, "address": "27, Jalan M-Panora 1/4" }, "188": { "lot": 337,
+                        "address": "29, Jalan M-Panora 1/4" }, "189": { "lot": 338, "address": "31, Jalan M-Panora 1/4" },
+                    "190": { "lot": 339, "address": "33, Jalan M-Panora 1/4" }, "191": { "lot": 340,
+                        "address": "35, Jalan M-Panora 1/4" }, "192": { "lot": 341, "address": "37, Jalan M-Panora 1/4" },
+                    "193": { "lot": 342, "address": "39, Jalan M-Panora 1/4" }, "194": { "lot": 343,
+                        "address": "41, Jalan M-Panora 1/4" }, "195": { "lot": 344, "address": "43, Jalan M-Panora 1/4" },
+                    "196": { "lot": 345, "address": "45, Jalan M-Panora 1/4" }, "197": { "lot": 346,
+                        "address": "47, Jalan M-Panora 1/4" }, "198": { "lot": 347, "address": "48, Jalan M-Panora 1/5" },
+                    "199": { "lot": 348, "address": "46, Jalan M-Panora 1/5" }, "200": { "lot": 349,
+                        "address": "42A, Jalan M-Panora 1/5" }, "201": { "lot": 350, "address": "42, Jalan M-Panora 1/5" },
+                    "202": { "lot": 351, "address": "40, Jalan M-Panora 1/5" }, "203": { "lot": 352,
+                        "address": "38, Jalan M-Panora 1/5" }, "204": { "lot": 353, "address": "36, Jalan M-Panora 1/5" },
+                    "205": { "lot": 354, "address": "32A, Jalan M-Panora 1/5" }, "206": { "lot": 355,
+                        "address": "32, Jalan M-Panora 1/5" }, "207": { "lot": 356, "address": "30, Jalan M-Panora 1/5" },
+                    "208": { "lot": 357, "address": "28, Jalan M-Panora 1/5" }, "209": { "lot": 358,
+                        "address": "26, Jalan M-Panora 1/5" }, "210": { "lot": 359, "address": "22A, Jalan M-Panora 1/5" },
+                    "211": { "lot": 360, "address": "22, Jalan M-Panora 1/5" }, "212": { "lot": 361,
+                        "address": "20, Jalan M-Panora 1/5" }, "213": { "lot": 362, "address": "18, Jalan M-Panora 1/5" },
+                    "214": { "lot": 363, "address": "16, Jalan M-Panora 1/5" }, "215": { "lot": 364,
+                        "address": "12A, Jalan M-Panora 1/5" }, "216": { "lot": 365, "address": "12, Jalan M-Panora 1/5" },
+                    "217": { "lot": 366, "address": "10, Jalan M-Panora 1/5" }, "218": { "lot": 367,
+                        "address": "8, Jalan M-Panora 1/5" }, "219": { "lot": 368, "address": "6, Jalan M-Panora 1/5" },
+                    "220": { "lot": 369, "address": "2A, Jalan M-Panora 1/5" }, "221": { "lot": 370,
+                        "address": "2, Jalan M-Panora 1/5" }, "222": { "lot": 371, "address": "1, Jalan M-Panora 1/5" },
+                    "223": { "lot": 372, "address": "3, Jalan M-Panora 1/5" }, "224": { "lot": 373,
+                        "address": "5, Jalan M-Panora 1/5" }, "225": { "lot": 374, "address": "7, Jalan M-Panora 1/5" },
+                    "226": { "lot": 375, "address": "9, Jalan M-Panora 1/5" }, "227": { "lot": 376,
+                        "address": "11, Jalan M-Panora 1/5" }, "228": { "lot": 377, "address": "13, Jalan M-Panora 1/5" },
+                    "229": { "lot": 378, "address": "15, Jalan M-Panora 1/5" }, "230": { "lot": 379,
+                        "address": "17, Jalan M-Panora 1/5" }, "231": { "lot": 380, "address": "19, Jalan M-Panora 1/5" },
+                    "232": { "lot": 381, "address": "21, Jalan M-Panora 1/5" }, "233": { "lot": 382,
+                        "address": "23, Jalan M-Panora 1/5" }, "234": { "lot": 383, "address": "25, Jalan M-Panora 1/5" },
+                    "235": { "lot": 384, "address": "27, Jalan M-Panora 1/5" }, "236": { "lot": 385,
+                        "address": "29, Jalan M-Panora 1/5" }, "237": { "lot": 386, "address": "31, Jalan M-Panora 1/5" },
+                    "238": { "lot": 387, "address": "33, Jalan M-Panora 1/5" }, "239": { "lot": 388,
+                        "address": "35, Jalan M-Panora 1/5" }, "240": { "lot": 389, "address": "37, Jalan M-Panora 1/5" },
+                    "241": { "lot": 390, "address": "39, Jalan M-Panora 1/5" }, "242": { "lot": 391,
+                        "address": "41, Jalan M-Panora 1/5" }, "243": { "lot": 392, "address": "43, Jalan M-Panora 1/5" },
+                    "244": { "lot": 393, "address": "45, Jalan M-Panora 1/5" }, "245": { "lot": 394,
+                        "address": "47, Jalan M-Panora 1/5" }, "246": { "lot": 395, "address": "49, Jalan M-Panora 1/5" },
+                    "247": { "lot": 396, "address": "51, Jalan M-Panora 1/5" } }
+            },
+            phase2: {
+                label: "Phase 2",
+                title: "M Panora Phase 2",
+                total: 149,
+                storageKey: "phase2-units-v1",
+                addressMap: { "001": { "lot": "1", "address": "21, Jalan M-Panora 2/1" }, "002": { "lot": "2",
+                        "address": "19, Jalan M-Panora 2/1" }, "003": { "lot": "3", "address": "17, Jalan M-Panora 2/1" },
+                    "004": { "lot": "3A", "address": "15, Jalan M-Panora 2/1" }, "005": { "lot": "5",
+                        "address": "13, Jalan M-Panora 2/1" }, "006": { "lot": "6", "address": "11, Jalan M-Panora 2/1" },
+                    "007": { "lot": "7", "address": "9, Jalan M-Panora 2/1" }, "008": { "lot": "8",
+                        "address": "7, Jalan M-Panora 2/1" }, "009": { "lot": "9", "address": "5, Jalan M-Panora 2/1" },
+                    "010": { "lot": "10", "address": "3, Jalan M-Panora 2/1" }, "011": { "lot": "11",
+                        "address": "1, Jalan M-Panora 2/1" }, "012": { "lot": "12", "address": "2, Jalan M-Panora 2/2" },
+                    "013": { "lot": "13", "address": "2A, Jalan M-Panora 2/2" }, "014": { "lot": "13A",
+                        "address": "6, Jalan M-Panora 2/2" }, "015": { "lot": "15", "address": "8, Jalan M-Panora 2/2" },
+                    "016": { "lot": "16", "address": "10, Jalan M-Panora 2/2" }, "017": { "lot": "17",
+                        "address": "12, Jalan M-Panora 2/2" }, "018": { "lot": "18", "address": "12A, Jalan M-Panora 2/2" },
+                    "019": { "lot": "19", "address": "16, Jalan M-Panora 2/2" }, "020": { "lot": "20",
+                        "address": "18, Jalan M-Panora 2/2" }, "021": { "lot": "21", "address": "20, Jalan M-Panora 2/2" },
+                    "022": { "lot": "22", "address": "22, Jalan M-Panora 2/2" }, "023": { "lot": "23",
+                        "address": "19, Jalan M-Panora 2/2" }, "024": { "lot": "23A", "address": "17, Jalan M-Panora 2/2" },
+                    "025": { "lot": "25", "address": "15, Jalan M-Panora 2/2" }, "026": { "lot": "26",
+                        "address": "13, Jalan M-Panora 2/2" }, "027": { "lot": "27", "address": "11, Jalan M-Panora 2/2" },
+                    "028": { "lot": "28", "address": "9, Jalan M-Panora 2/2" }, "029": { "lot": "29",
+                        "address": "7, Jalan M-Panora 2/2" }, "030": { "lot": "30", "address": "5, Jalan M-Panora 2/2" },
+                    "031": { "lot": "31", "address": "3, Jalan M-Panora 2/2" }, "032": { "lot": "32",
+                        "address": "1, Jalan M-Panora 2/2" }, "033": { "lot": "33", "address": "2, Jalan M-Panora 2/3" },
+                    "034": { "lot": "33A", "address": "2A, Jalan M-Panora 2/3" }, "035": { "lot": "35",
+                        "address": "6, Jalan M-Panora 2/3" }, "036": { "lot": "36", "address": "8, Jalan M-Panora 2/3" },
+                    "037": { "lot": "37", "address": "10, Jalan M-Panora 2/3" }, "038": { "lot": "38",
+                        "address": "12, Jalan M-Panora 2/3" }, "039": { "lot": "39", "address": "12A, Jalan M-Panora 2/3" },
+                    "040": { "lot": "40", "address": "16, Jalan M-Panora 2/3" }, "041": { "lot": "41",
+                        "address": "18, Jalan M-Panora 2/3" }, "042": { "lot": "42", "address": "20, Jalan M-Panora 2/3" },
+                    "043": { "lot": "43", "address": "22, Jalan M-Panora 2/3" }, "044": { "lot": "43A",
+                        "address": "22A, Jalan M-Panora 2/3" }, "045": { "lot": "45", "address": "26, Jalan M-Panora 2/3" },
+                    "046": { "lot": "46", "address": "28, Jalan M-Panora 2/3" }, "047": { "lot": "47",
+                        "address": "30, Jalan M-Panora 2/3" }, "048": { "lot": "48", "address": "32, Jalan M-Panora 2/3" },
+                    "049": { "lot": "49", "address": "32A, Jalan M-Panora 2/3" }, "050": { "lot": "50",
+                        "address": "36, Jalan M-Panora 2/3" }, "051": { "lot": "51", "address": "38, Jalan M-Panora 2/3" },
+                    "052": { "lot": "52", "address": "40, Jalan M-Panora 2/3" }, "053": { "lot": "53",
+                        "address": "42, Jalan M-Panora 2/3" }, "054": { "lot": "53A", "address": "42A, Jalan M-Panora 2/3" },
+                    "055": { "lot": "55", "address": "46, Jalan M-Panora 2/3" }, "056": { "lot": "56",
+                        "address": "48, Jalan M-Panora 2/3" }, "057": { "lot": "57", "address": "50, Jalan M-Panora 2/3" },
+                    "058": { "lot": "58", "address": "52, Jalan M-Panora 2/3" }, "059": { "lot": "59",
+                        "address": "53, Jalan M-Panora 2/3" }, "060": { "lot": "60", "address": "51, Jalan M-Panora 2/3" },
+                    "061": { "lot": "61", "address": "49, Jalan M-Panora 2/3" }, "062": { "lot": "62",
+                        "address": "47, Jalan M-Panora 2/3" }, "063": { "lot": "63", "address": "45, Jalan M-Panora 2/3" },
+                    "064": { "lot": "63A", "address": "43, Jalan M-Panora 2/3" }, "065": { "lot": "65",
+                        "address": "41, Jalan M-Panora 2/3" }, "066": { "lot": "66", "address": "39, Jalan M-Panora 2/3" },
+                    "067": { "lot": "67", "address": "37, Jalan M-Panora 2/3" }, "068": { "lot": "68",
+                        "address": "35, Jalan M-Panora 2/3" }, "069": { "lot": "69", "address": "33, Jalan M-Panora 2/3" },
+                    "070": { "lot": "70", "address": "31, Jalan M-Panora 2/3" }, "071": { "lot": "71",
+                        "address": "29, Jalan M-Panora 2/3" }, "072": { "lot": "72", "address": "27, Jalan M-Panora 2/3" },
+                    "073": { "lot": "73", "address": "25, Jalan M-Panora 2/3" }, "074": { "lot": "73A",
+                        "address": "23, Jalan M-Panora 2/3" }, "075": { "lot": "75", "address": "21, Jalan M-Panora 2/3" },
+                    "076": { "lot": "76", "address": "19, Jalan M-Panora 2/3" }, "077": { "lot": "77",
+                        "address": "17, Jalan M-Panora 2/3" }, "078": { "lot": "78", "address": "15, Jalan M-Panora 2/3" },
+                    "079": { "lot": "79", "address": "13, Jalan M-Panora 2/3" }, "080": { "lot": "80",
+                        "address": "11, Jalan M-Panora 2/3" }, "081": { "lot": "81", "address": "9, Jalan M-Panora 2/3" },
+                    "082": { "lot": "82", "address": "7, Jalan M-Panora 2/3" }, "083": { "lot": "83",
+                        "address": "5, Jalan M-Panora 2/3" }, "084": { "lot": "83A", "address": "3, Jalan M-Panora 2/3" },
+                    "085": { "lot": "85", "address": "1, Jalan M-Panora 2/3" }, "086": { "lot": "86",
+                        "address": "2, Jalan M-Panora 2/4" }, "087": { "lot": "87", "address": "2A, Jalan M-Panora 2/4" },
+                    "088": { "lot": "88", "address": "6, Jalan M-Panora 2/4" }, "089": { "lot": "89",
+                        "address": "8, Jalan M-Panora 2/4" }, "090": { "lot": "90", "address": "10, Jalan M-Panora 2/4" },
+                    "091": { "lot": "91", "address": "12, Jalan M-Panora 2/4" }, "092": { "lot": "92",
+                        "address": "12A, Jalan M-Panora 2/4" }, "093": { "lot": "93", "address": "16, Jalan M-Panora 2/4" },
+                    "094": { "lot": "93A", "address": "18, Jalan M-Panora 2/4" }, "095": { "lot": "95",
+                        "address": "20, Jalan M-Panora 2/4" }, "096": { "lot": "96", "address": "22, Jalan M-Panora 2/4" },
+                    "097": { "lot": "97", "address": "22A, Jalan M-Panora 2/4" }, "098": { "lot": "98",
+                        "address": "26, Jalan M-Panora 2/4" }, "099": { "lot": "99", "address": "28, Jalan M-Panora 2/4" },
+                    "100": { "lot": "100", "address": "30, Jalan M-Panora 2/4" }, "101": { "lot": "101",
+                        "address": "32, Jalan M-Panora 2/4" }, "102": { "lot": "102", "address": "32A, Jalan M-Panora 2/4" },
+                    "103": { "lot": "103", "address": "36, Jalan M-Panora 2/4" }, "104": { "lot": "103A",
+                        "address": "38, Jalan M-Panora 2/4" }, "105": { "lot": "105", "address": "40, Jalan M-Panora 2/4" },
+                    "106": { "lot": "106", "address": "42, Jalan M-Panora 2/4" }, "107": { "lot": "107",
+                        "address": "42A, Jalan M-Panora 2/4" }, "108": { "lot": "108", "address": "46, Jalan M-Panora 2/4" },
+                    "109": { "lot": "109", "address": "48, Jalan M-Panora 2/4" }, "110": { "lot": "110",
+                        "address": "50, Jalan M-Panora 2/4" }, "111": { "lot": "111", "address": "52, Jalan M-Panora 2/4" },
+                    "112": { "lot": "112", "address": "52A, Jalan M-Panora 2/4" }, "113": { "lot": "113",
+                        "address": "56, Jalan M-Panora 2/4" }, "114": { "lot": "113A", "address": "58, Jalan M-Panora 2/4" },
+                    "115": { "lot": "115", "address": "69, Jalan M-Panora 2/4" }, "116": { "lot": "116",
+                        "address": "67, Jalan M-Panora 2/4" }, "117": { "lot": "117", "address": "65, Jalan M-Panora 2/4" },
+                    "118": { "lot": "118", "address": "63, Jalan M-Panora 2/4" }, "119": { "lot": "119",
+                        "address": "61, Jalan M-Panora 2/4" }, "120": { "lot": "120", "address": "59, Jalan M-Panora 2/4" },
+                    "121": { "lot": "121", "address": "57, Jalan M-Panora 2/4" }, "122": { "lot": "122",
+                        "address": "55, Jalan M-Panora 2/4" }, "123": { "lot": "123", "address": "53, Jalan M-Panora 2/4" },
+                    "124": { "lot": "123A", "address": "51, Jalan M-Panora 2/4" }, "125": { "lot": "125",
+                        "address": "49, Jalan M-Panora 2/4" }, "126": { "lot": "126", "address": "47, Jalan M-Panora 2/4" },
+                    "127": { "lot": "127", "address": "45, Jalan M-Panora 2/4" }, "128": { "lot": "128",
+                        "address": "43, Jalan M-Panora 2/4" }, "129": { "lot": "129", "address": "41, Jalan M-Panora 2/4" },
+                    "130": { "lot": "130", "address": "39, Jalan M-Panora 2/4" }, "131": { "lot": "131",
+                        "address": "37, Jalan M-Panora 2/4" }, "132": { "lot": "132", "address": "35, Jalan M-Panora 2/4" },
+                    "133": { "lot": "133", "address": "33, Jalan M-Panora 2/4" }, "134": { "lot": "133A",
+                        "address": "31, Jalan M-Panora 2/4" }, "135": { "lot": "135", "address": "29, Jalan M-Panora 2/4" },
+                    "136": { "lot": "136", "address": "27, Jalan M-Panora 2/4" }, "137": { "lot": "137",
+                        "address": "25, Jalan M-Panora 2/4" }, "138": { "lot": "138", "address": "23, Jalan M-Panora 2/4" },
+                    "139": { "lot": "139", "address": "21, Jalan M-Panora 2/4" }, "140": { "lot": "140",
+                        "address": "19, Jalan M-Panora 2/4" }, "141": { "lot": "141", "address": "17, Jalan M-Panora 2/4" },
+                    "142": { "lot": "142", "address": "15, Jalan M-Panora 2/4" }, "143": { "lot": "143",
+                        "address": "13, Jalan M-Panora 2/4" }, "144": { "lot": "143A", "address": "11, Jalan M-Panora 2/4" },
+                    "145": { "lot": "145", "address": "9, Jalan M-Panora 2/4" }, "146": { "lot": "146",
+                        "address": "7, Jalan M-Panora 2/4" }, "147": { "lot": "147", "address": "5, Jalan M-Panora 2/4" },
+                    "148": { "lot": "148", "address": "3, Jalan M-Panora 2/4" }, "149": { "lot": "149",
+                        "address": "1, Jalan M-Panora 2/4" } }
+            }
+        };
+        const PHASE_KEYS = Object.keys(PHASES);
+        const INHOUSE_KEY = "inhouse-list-v1";
 
-    <div class="sm-notes">
-      <p><b>Legend:</b> Each box represents a unit. Click on a unit to update its status (Admin only).</p>
-      <p><b>Corner Lots:</b> Units at the ends of each block are marked with a thicker border.</p>
-      <p><b>Total Units:</b> Phase 1: 247 | Phase 2: 149 | Total: 396</p>
-    </div>
-  `;
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbwdOGOrUYl6_r7AuzlLISsVoVOZARw-3KjyaREDWP8LKjLZVIX5i2fVzDWq9exCtDn24w/exec";
 
-  app.innerHTML = html;
+        // ── State ──
+        let state = {
+            activeTab: "all",
+            units: {},
+            inhouseList: [],
+            filter: "all",
+            search: "",
+            isAdmin: false,
+            pdfFile: null, // stores the uploaded PDF File object
+            pdfDataUrl: null // stores the data URL for display
+        };
 
-  // Wire up event listeners
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.activeTab = btn.dataset.tab;
-      state.filter = "all";
-      state.search = "";
-      render();
-    });
-  });
+        const ADMIN_PASSWORD = "admin123";
 
-  document.querySelectorAll(".sm-unit").forEach(el => {
-    el.addEventListener("click", () => {
-      if (!state.isAdmin) { 
-        alert("Viewing only. Log in as admin to update unit status."); 
-        return; 
-      }
-      openUnitModal(el.dataset.phase, el.dataset.unit);
-    });
-  });
+        function unitList(phaseKey) {
+            const total = PHASES[phaseKey].total;
+            const nums = [];
+            for (let i = 1; i <= total; i++) nums.push(String(i).padStart(3, "0"));
+            return nums;
+        }
 
-  const adminBtn = document.getElementById("adminBtn");
-  if (adminBtn) adminBtn.addEventListener("click", () => {
-    if (state.isAdmin) { 
-      state.isAdmin = false; 
-      render(); 
-      return; 
-    }
-    const entered = prompt("Enter admin password:");
-    if (entered === ADMIN_PASSWORD) { 
-      state.isAdmin = true; 
-      render(); 
-    }
-    else if (entered !== null) alert("Incorrect password.");
-  });
+        function defaultUnitData() {
+            return { status: "vacant", updatedBy: "", updatedAt: "", permitExpiry: "", renovationNote: "", history: [] };
+        }
 
-  const setupBtnEl = document.getElementById("setupBtn");
-  if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
-}
+        // ── API Helpers ──
+        async function scriptGet(sheet, key) {
+            const url =
+                `${SCRIPT_URL}?action=get&sheet=${encodeURIComponent(sheet)}`;
+            const res = await fetch(url);
+            const json = await res.json();
+            if (json.error) throw new Error(json.error);
+            return json.data && json.data[key] !== undefined ? json.data[key] : null;
+        }
 
-function render() {
-  if (state.activeTab === "sitemap") { renderSiteMap(); return; }
-  const app = document.getElementById("app");
-  const tab = state.activeTab;
-  const isAll = tab === "all";
-  const activePhases = isAll ? PHASE_KEYS : [tab];
-
-  // Aggregate stats across active phase(s)
-  let combined = { counts: { vacant: 0, vp: 0, renovation: 0, movein: 0 }, mismatchCount: 0, expiredCount: 0, mismatchUnits: [], expiredUnits: [], total: 0 };
-  const perPhase = {};
-  activePhases.forEach(pk => {
-    const c = computeCounts(pk);
-    perPhase[pk] = c;
-    combined.counts.vacant += c.counts.vacant;
-    combined.counts.vp += c.counts.vp;
-    combined.counts.renovation += c.counts.renovation;
-    combined.counts.movein += c.counts.movein;
-    combined.mismatchCount += c.mismatchCount;
-    combined.expiredCount += c.expiredCount;
-    combined.mismatchUnits.push(...c.mismatchUnits.map(no => ({ phaseKey: pk, no })));
-    combined.expiredUnits.push(...c.expiredUnits.map(no => ({ phaseKey: pk, no })));
-    combined.total += c.total;
-  });
-
-  // Build filtered card list
-  let cards = [];
-  activePhases.forEach(pk => {
-    unitList(pk).forEach(no => cards.push({ phaseKey: pk, no }));
-  });
-  cards = cards.filter(({ phaseKey, no }) => {
-    const u = state.units[phaseKey][no];
-    if (state.filter !== "all" && u.status !== state.filter) return false;
-
-    const term = state.search.trim().toLowerCase();
-    if (term) {
-      const { address } = unitLabel(phaseKey, no);
-      const houseNo = houseNumber(address).toLowerCase();
-      if (houseNo !== term) return false;
-    }
-    return true;
-  });
-
-  const pageTitle = isAll ? "M Panora — All Phases" : PHASES[tab].title;
-
-  app.innerHTML = `
-    <div class="masthead">
-      <div class="masthead-left">
-        <span class="app-title">GatekeeperGo</span>
-        <span class="app-sub">M Panora Unit Status Tracker</span>
-      </div>
-      <div class="masthead-right">
-        ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
-        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
-      </div>
-    </div>
-
-    <div class="tabs">
-      <button class="tab-btn ${tab === 'all' ? 'active' : ''}" data-tab="all">ALL</button>
-      ${PHASE_KEYS.map(pk => `<button class="tab-btn ${tab === pk ? 'active' : ''}" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
-      <button class="tab-btn ${tab === 'sitemap' ? 'active' : ''}" data-tab="sitemap">Site Map</button>
-    </div>
-
-    <div class="alert-banner ${combined.mismatchCount > 0 ? 'show' : ''}">
-      <span><b>${combined.mismatchCount} unit${combined.mismatchCount === 1 ? '' : 's'}</b> marked under renovation with no VP recorded in history: ${combined.mismatchUnits.map(({phaseKey, no}) => { const l = unitLabel(phaseKey, no); return `${isAll ? PHASES[phaseKey].label + ' ' : ''}P-${l.lot} (${l.address})`; }).join(", ") || "—"}. Confirm before allowing contractor access.</span>
-    </div>
-
-    <div class="alert-banner expired-banner ${combined.expiredCount > 0 ? 'show' : ''}">
-      <span><b>${combined.expiredCount} unit${combined.expiredCount === 1 ? '' : 's'}</b> have an expired renovation permit: ${combined.expiredUnits.map(({phaseKey, no}) => { const l = unitLabel(phaseKey, no); return `${isAll ? PHASES[phaseKey].label + ' ' : ''}P-${l.lot} (${l.address})`; }).join(", ") || "—"}. Contractors should not be working on these units until the permit is renewed.</span>
-    </div>
-
-    <div class="header">
-      <div>
-        <h1>${pageTitle}</h1>
-        <p>${combined.total} units</p>
-      </div>
-    </div>
-
-    <div class="stats ${isAll ? 'stats-5' : ''}">
-      ${isAll ? `<div class="stat-card"><div class="stat-num">${combined.total}</div><div class="stat-label">Total units (both phases)</div></div>` : ''}
-      <div class="stat-card stat-vp"><div class="stat-num">${combined.total - combined.counts.vacant}</div><div class="stat-label">Total VP issued (total − vacant)</div></div>
-      <div class="stat-card stat-vacant"><div class="stat-num">${combined.counts.vacant}</div><div class="stat-label">Vacant Unit</div></div>
-      <div class="stat-card stat-renovation"><div class="stat-num">${combined.counts.renovation}</div><div class="stat-label">Renovation Unit</div></div>
-      <div class="stat-card stat-movein"><div class="stat-num">${combined.counts.movein}</div><div class="stat-label">Move-in Unit</div></div>
-    </div>
-
-    <div class="filter-group">
-      <div class="filter-group-title">Unit Status</div>
-      <div class="filter-group-pills">
-        <button class="filter-btn ${state.filter === 'all' ? 'active' : ''}" data-filter="all">All</button>
-        <button class="filter-btn ${state.filter === 'vacant' ? 'active' : ''}" data-filter="vacant"><span class="dot" style="background:var(--vacant-600)"></span>Vacant Unit</button>
-        <button class="filter-btn ${state.filter === 'vp' ? 'active' : ''}" data-filter="vp"><span class="dot" style="background:var(--vp-600)"></span>VP Unit</button>
-        <button class="filter-btn ${state.filter === 'renovation' ? 'active' : ''}" data-filter="renovation"><span class="dot" style="background:var(--reno-600)"></span>Renovation Unit</button>
-        <button class="filter-btn ${state.filter === 'movein' ? 'active' : ''}" data-filter="movein"><span class="dot" style="background:var(--movein-600)"></span>Move-in Unit</button>
-      </div>
-    </div>
-
-    <div class="search-row">
-      <input type="text" id="searchInput" placeholder="Search house number" value="${state.search}">
-    </div>
-
-    <div id="grid">
-      ${cards.length === 0 ? '<div class="empty">No units match this search or filter.</div>' :
-        state.search.trim() ? `
-          <div class="street-group">
-            <div class="street-group-header">
-              <span>Search results <span class="street-group-count">${cards.length} unit${cards.length === 1 ? '' : 's'}</span></span>
-            </div>
-            <div class="grid">
-              ${cards.map(({ phaseKey, no }) => renderUnitCard(phaseKey, no, isAll)).join("")}
-            </div>
-          </div>
-        ` :
-        (() => {
-          const groups = {};
-          cards.forEach(({ phaseKey, no }) => {
-            const { address } = unitLabel(phaseKey, no);
-            const street = streetName(address);
-            if (!groups[street]) groups[street] = [];
-            groups[street].push({ phaseKey, no });
-          });
-          const streetKeys = Object.keys(groups).sort((a, b) => {
-            const ka = streetSortKey(a), kb = streetSortKey(b);
-            return ka[0] - kb[0] || ka[1] - kb[1];
-          });
-          return streetKeys.map(street => {
-            const streetCounts = { vacant: 0, vp: 0, renovation: 0, movein: 0 };
-            groups[street].forEach(({ phaseKey, no }) => {
-              streetCounts[state.units[phaseKey][no].status]++;
+        async function scriptSet(sheet, key, value) {
+            const res = await fetch(SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({ action: "set", sheet, key, value })
             });
+            const json = await res.json();
+            if (json.error) throw new Error(json.error);
+            return json.success === true;
+        }
+
+        // ── Data Loading ──
+        async function loadData() {
+            const phasePromise = Promise.all(PHASE_KEYS.map(async (phaseKey) => {
+                try {
+                    const value = await scriptGet(phaseKey, "units");
+                    return { phaseKey, data: value ? JSON.parse(value) : {} };
+                } catch (e) {
+                    console.error("Load failed for", phaseKey, e);
+                    return { phaseKey, data: {} };
+                }
+            }));
+
+            const inhousePromise = (async () => {
+                try {
+                    const value = await scriptGet("inhouse", "list");
+                    return value ? JSON.parse(value) : [];
+                } catch (e) {
+                    console.error("Load failed for inhouse list", e);
+                    return [];
+                }
+            })();
+
+            const [phaseResults, inhouseList] = await Promise.all([phasePromise, inhousePromise]);
+
+            phaseResults.forEach(({ phaseKey, data }) => {
+                state.units[phaseKey] = data;
+                unitList(phaseKey).forEach(no => {
+                    if (!state.units[phaseKey][no]) state.units[phaseKey][no] = defaultUnitData();
+                });
+            });
+
+            state.inhouseList = inhouseList;
+        }
+
+        async function saveUnits(phaseKey, retries = 1) {
+            try {
+                const ok = await scriptSet(phaseKey, "units", JSON.stringify(state.units[phaseKey]));
+                if (!ok) throw new Error("Script returned no success");
+                return true;
+            } catch (e) {
+                console.error("Save failed", e);
+                if (retries > 0) {
+                    await new Promise(r => setTimeout(r, 600));
+                    return saveUnits(phaseKey, retries - 1);
+                }
+                alert(
+                    "Could not save this change. The server may be temporarily unavailable — please wait a few seconds and try again. If this keeps happening, let your administrator know."
+                    );
+                return false;
+            }
+        }
+
+        async function saveInhouse(retries = 1) {
+            try {
+                const ok = await scriptSet("inhouse", "list", JSON.stringify(state.inhouseList));
+                if (!ok) throw new Error("Script returned no success");
+                return true;
+            } catch (e) {
+                console.error("Save failed", e);
+                if (retries > 0) {
+                    await new Promise(r => setTimeout(r, 600));
+                    return saveInhouse(retries - 1);
+                }
+                alert("Could not save the in-house list. Please try again in a moment.");
+                return false;
+            }
+        }
+
+        // ── Helpers ──
+        function isMismatch(phaseKey, unitNo) {
+            const u = state.units[phaseKey][unitNo];
+            return u.status === "renovation" && !(u.history || []).some(h => h.status === "vp");
+        }
+
+        function isExpiredPermit(phaseKey, unitNo) {
+            const u = state.units[phaseKey][unitNo];
+            if (u.status !== "renovation" || !u.permitExpiry) return false;
+            const today = new Date().toISOString().slice(0, 10);
+            return u.permitExpiry < today;
+        }
+
+        function formatDate(iso) {
+            if (!iso) return "—";
+            const d = new Date(iso);
+            return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) + " " +
+                d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+        }
+
+        function formatPermitDate(dateStr) {
+            if (!dateStr) return "";
+            const parts = dateStr.split("-");
+            if (parts.length !== 3) return dateStr;
+            const [yyyy, mm, dd] = parts;
+            return `${dd}.${mm}.${yyyy.slice(2)}`;
+        }
+
+        function computeCounts(phaseKey) {
+            const units = unitList(phaseKey);
+            const counts = { vacant: 0, vp: 0, renovation: 0, movein: 0 };
+            let mismatchCount = 0,
+                expiredCount = 0;
+            const mismatchUnits = [],
+                expiredUnits = [];
+            units.forEach(no => {
+                counts[state.units[phaseKey][no].status]++;
+                if (isMismatch(phaseKey, no)) { mismatchCount++;
+                    mismatchUnits.push(no); }
+                if (isExpiredPermit(phaseKey, no)) { expiredCount++;
+                    expiredUnits.push(no); }
+            });
+            return { counts, mismatchCount, expiredCount, mismatchUnits, expiredUnits, total: units.length };
+        }
+
+        function unitLabel(phaseKey, no) {
+            const addr = PHASES[phaseKey].addressMap[no];
+            return { lot: (addr && addr.lot) || no, address: (addr && addr.address) || "" };
+        }
+
+        function streetName(address) {
+            const m = String(address).match(/Jalan M-Panora \d+\/\d+/);
+            return m ? m[0] : "Other";
+        }
+
+        function houseNumber(address) {
+            return String(address).split(",")[0].trim();
+        }
+
+        function streetSortKey(street) {
+            const m = street.match(/(\d+)\/(\d+)/);
+            if (!m) return [99, 99];
+            return [parseInt(m[1]), parseInt(m[2])];
+        }
+
+        function renderUnitCard(phaseKey, no, isAll) {
+            const u = state.units[phaseKey][no];
+            const def = STATUS_DEFS[u.status];
+            const { lot, address } = unitLabel(phaseKey, no);
+            const mismatch = isMismatch(phaseKey, no);
+            const expired = isExpiredPermit(phaseKey, no);
             return `
-            <div class="street-group">
-              <div class="street-group-header">
-                <span>${street} <span class="street-group-count">${groups[street].length} unit${groups[street].length === 1 ? '' : 's'}</span></span>
-                <span class="street-group-breakdown">
-                  <span class="sgb-item"><span class="sgb-dot" style="background:var(--vacant-600)"></span>${streetCounts.vacant} Vacant Unit</span>
-                  <span class="sgb-item"><span class="sgb-dot" style="background:var(--vp-600)"></span>${streetCounts.vp} VP Unit</span>
-                  <span class="sgb-item"><span class="sgb-dot" style="background:var(--reno-600)"></span>${streetCounts.renovation} Renovation Unit</span>
-                  <span class="sgb-item"><span class="sgb-dot" style="background:var(--movein-600)"></span>${streetCounts.movein} Move-in Unit</span>
-                </span>
+            <div class="unit-card ${def.cls}${expired ? ' expired-permit' : ''}" data-phase="${phaseKey}" data-unit="${no}">
+              ${mismatch ? '<span class="uflag" title="Renovation flagged without VP on record"></span>' : ''}
+              ${expired ? '<span class="uflag expired" title="Renovation permit expired"></span>' : ''}
+              ${isAll ? `<div class="uphase">${PHASES[phaseKey].label}</div>` : ''}
+              <div class="uaddr">${address}</div>
+              <div class="uno">P-${lot}</div>
+              <div class="ustatus">${expired ? `Work Permit Expired on ${formatPermitDate(u.permitExpiry)}` : `${def.short}${u.status === 'renovation' && u.permitExpiry ? ` · til ${formatPermitDate(u.permitExpiry)}` : ''}`}</div>
+            </div>
+          `;
+        }
+
+        // ── PDF handling ──
+        function handlePDFUpload(file) {
+            if (!file || file.type !== 'application/pdf') {
+                alert('Please upload a PDF file.');
+                return;
+            }
+            state.pdfFile = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                state.pdfDataUrl = e.target.result;
+                // If site map tab is active, re-render
+                if (state.activeTab === 'sitemap') {
+                    render();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ── renderSiteMap: shows PDF as a picture ──
+        function renderSiteMap() {
+            const app = document.getElementById("app");
+
+            const pdfHtml = state.pdfDataUrl ? `
+              <div class="sm-pdf-container">
+                <div class="sm-pdf-page-wrap">
+                  <img src="${state.pdfDataUrl}" alt="Site Plan" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:4px;" />
+                </div>
+                <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);">
+                  <b>Site Plan</b> — ${state.pdfFile ? state.pdfFile.name : 'PDF'}
+                </div>
               </div>
-              <div class="grid">
-                ${groups[street].map(({ phaseKey, no }) => renderUnitCard(phaseKey, no, isAll)).join("")}
+            ` : `
+              <div class="sm-pdf-container">
+                <div class="sm-pdf-placeholder">
+                  <span class="icon">📄</span>
+                  <div>No site plan uploaded.</div>
+                  <div class="hint">Upload a PDF to display the site map.</div>
+                </div>
+              </div>
+            `;
+
+            const html = `
+            <div class="masthead">
+              <div class="masthead-left">
+                <span class="app-title">GatekeeperGo</span>
+                <span class="app-sub">M Panora Unit Status Tracker</span>
+              </div>
+              <div class="masthead-right">
+                ${state.isAdmin ? '<button class="setup-btn" id="setupBtn">Manage in-house list</button>' : ''}
+                <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
+              </div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab-btn" data-tab="all">ALL</button>
+              ${PHASE_KEYS.map(pk => `<button class="tab-btn" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
+              <button class="tab-btn active" data-tab="sitemap">Site Map</button>
+            </div>
+
+            ${pdfHtml}
+
+            <div class="sm-notes">
+              <p><b>Site Map:</b> Displays the uploaded site plan PDF as a picture.</p>
+              <p>To update the site plan, upload a new PDF using the file input below.</p>
+              <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                <input type="file" id="pdfUploadInput" accept=".pdf" style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-md);font-size:13px;" />
+                <button class="btn primary" id="pdfUploadBtn" style="flex:0 0 auto;padding:6px 16px;">Upload PDF</button>
+                ${state.pdfFile ? `<span style="font-size:12px;color:var(--text-secondary);">✓ ${state.pdfFile.name}</span>` : ''}
               </div>
             </div>
           `;
-          }).join("");
-        })()
-      }
-    </div>
 
-    <div class="overlay" id="unitOverlay">
-      <div class="modal" id="unitModal"></div>
-    </div>
+            app.innerHTML = html;
 
-    <div class="overlay" id="inhouseOverlay">
-      <div class="modal" id="inhouseModal"></div>
-    </div>
-  `;
+            // Wire up events
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    state.activeTab = btn.dataset.tab;
+                    state.filter = "all";
+                    state.search = "";
+                    render();
+                });
+            });
 
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.activeTab = btn.dataset.tab;
-      state.filter = "all";
-      state.search = "";
-      render();
-    });
-  });
-  document.getElementById("searchInput").addEventListener("input", e => {
-    state.search = e.target.value;
-    const cursorPos = e.target.selectionStart;
-    render();
-    const newInput = document.getElementById("searchInput");
-    if (newInput) {
-      newInput.focus();
-      newInput.setSelectionRange(cursorPos, cursorPos);
-    }
-  });
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.filter = btn.dataset.filter;
-      render();
-    });
-  });
-  document.querySelectorAll(".unit-card").forEach(card => {
-    card.addEventListener("click", () => {
-      if (!state.isAdmin) {
-        alert("Viewing only. Log in as admin to update unit status.");
-        return;
-      }
-      openUnitModal(card.dataset.phase, card.dataset.unit);
-    });
-  });
-  const setupBtnEl = document.getElementById("setupBtn");
-  if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
-  document.getElementById("adminBtn").addEventListener("click", () => {
-    if (state.isAdmin) {
-      state.isAdmin = false;
-      render();
-    } else {
-      const entered = prompt("Enter admin password:");
-      if (entered === null) return;
-      if (entered === ADMIN_PASSWORD) {
-        state.isAdmin = true;
-        render();
-      } else {
-        alert("Incorrect password.");
-      }
-    }
-  });
-}
+            const adminBtn = document.getElementById("adminBtn");
+            if (adminBtn) adminBtn.addEventListener("click", () => {
+                if (state.isAdmin) {
+                    state.isAdmin = false;
+                    render();
+                    return;
+                }
+                const entered = prompt("Enter admin password:");
+                if (entered === ADMIN_PASSWORD) {
+                    state.isAdmin = true;
+                    render();
+                } else if (entered !== null) {
+                    alert("Incorrect password.");
+                }
+            });
 
-function openUnitModal(phaseKey, unitNo) {
-  const u = state.units[phaseKey][unitNo];
-  const overlay = document.getElementById("unitOverlay");
-  const modal = document.getElementById("unitModal");
-  const { lot, address } = unitLabel(phaseKey, unitNo);
+            const setupBtnEl = document.getElementById("setupBtn");
+            if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
 
-  const inhouseOptions = state.inhouseList.length
-    ? state.inhouseList.map(g => `<option value="${g}">${g}</option>`).join("")
-    : `<option value="">No in-house staff set up yet</option>`;
+            // PDF upload
+            const uploadBtn = document.getElementById("pdfUploadBtn");
+            const uploadInput = document.getElementById("pdfUploadInput");
+            if (uploadBtn && uploadInput) {
+                uploadBtn.addEventListener("click", () => {
+                    const file = uploadInput.files[0];
+                    if (file) {
+                        handlePDFUpload(file);
+                    } else {
+                        alert("Please select a PDF file first.");
+                    }
+                });
+                uploadInput.addEventListener("change", () => {
+                    const file = uploadInput.files[0];
+                    if (file) handlePDFUpload(file);
+                });
+            }
+        }
 
-  const historyHtml = (u.history || []).slice().reverse().slice(0, 10).map(h => `
-    <div class="history-item">
-      <div class="h-status">${STATUS_DEFS[h.status].label}${h.status === 'renovation' && h.permitExpiry ? ` · permit until ${formatPermitDate(h.permitExpiry)}` : ''}</div>
-      ${h.status === 'renovation' && h.renovationNote ? `<div class="h-meta" style="font-style:italic;">"${h.renovationNote.replace(/</g, "&lt;")}"</div>` : ''}
-      <div class="h-meta">${h.updatedBy || "Unknown"} · ${formatDate(h.updatedAt)}</div>
-    </div>
-  `).join("") || `<div class="history-item h-meta">No changes logged yet.</div>`;
+        // ── Main render ──
+        function render() {
+            if (state.activeTab === "sitemap") {
+                renderSiteMap();
+                return;
+            }
 
-  modal.innerHTML = `
-    <button class="close-x" id="closeUnit">&times;</button>
-    <h2>P-${lot}</h2>
-    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;">
-      ${PHASES[phaseKey].label}${address ? ` · ${address}` : ''}<br>
-      Current status: <b>${STATUS_DEFS[u.status].label}</b><br>
-      Last updated: ${u.updatedAt ? formatDate(u.updatedAt) + " by " + (u.updatedBy || "—") : "Never"}
-      ${u.status === 'renovation' && u.permitExpiry ? `<br>Permit valid until: <b>${formatPermitDate(u.permitExpiry)}</b>${isExpiredPermit(phaseKey, unitNo) ? ' <span style="color:var(--danger-600)">(expired)</span>' : ''}` : ''}
-      ${u.status === 'renovation' && u.renovationNote ? `<br>Note: <i>${u.renovationNote.replace(/</g, "&lt;")}</i>` : ''}
-    </p>
+            const app = document.getElementById("app");
+            const tab = state.activeTab;
+            const isAll = tab === "all";
+            const activePhases = isAll ? PHASE_KEYS : [tab];
 
-    <label for="statusSelect">Update status</label>
-    <select id="statusSelect">
-      ${Object.entries(STATUS_DEFS).map(([key, def]) =>
-        `<option value="${key}" ${key === u.status ? "selected" : ""}>${def.label}</option>`
-      ).join("")}
-    </select>
+            // Aggregate stats
+            let combined = { counts: { vacant: 0, vp: 0, renovation: 0, movein: 0 }, mismatchCount: 0, expiredCount: 0,
+                mismatchUnits: [], expiredUnits: [], total: 0 };
+            const perPhase = {};
+            activePhases.forEach(pk => {
+                const c = computeCounts(pk);
+                perPhase[pk] = c;
+                combined.counts.vacant += c.counts.vacant;
+                combined.counts.vp += c.counts.vp;
+                combined.counts.renovation += c.counts.renovation;
+                combined.counts.movein += c.counts.movein;
+                combined.mismatchCount += c.mismatchCount;
+                combined.expiredCount += c.expiredCount;
+                combined.mismatchUnits.push(...c.mismatchUnits.map(no => ({ phaseKey: pk, no })));
+                combined.expiredUnits.push(...c.expiredUnits.map(no => ({ phaseKey: pk, no })));
+                combined.total += c.total;
+            });
 
-    <div id="permitField" style="display:${u.status === 'renovation' ? 'block' : 'none'};">
-      <label for="permitExpiry">Renovation permit valid until</label>
-      <input type="date" id="permitExpiry" value="${u.permitExpiry || ''}">
-      <label for="renovationNote">Notes on current status</label>
-      <textarea id="renovationNote" rows="3" placeholder="e.g. Tiling in progress, expected completion next week">${u.renovationNote || ''}</textarea>
-    </div>
+            // Build filtered cards
+            let cards = [];
+            activePhases.forEach(pk => {
+                unitList(pk).forEach(no => cards.push({ phaseKey: pk, no }));
+            });
+            cards = cards.filter(({ phaseKey, no }) => {
+                const u = state.units[phaseKey][no];
+                if (state.filter !== "all" && u.status !== state.filter) return false;
+                const term = state.search.trim().toLowerCase();
+                if (term) {
+                    const { address } = unitLabel(phaseKey, no);
+                    const houseNo = houseNumber(address).toLowerCase();
+                    if (houseNo !== term) return false;
+                }
+                return true;
+            });
 
-    <label for="inhouseSelect">Updated by</label>
-    <select id="inhouseSelect">
-      <option value="">Select in-house…</option>
-      ${inhouseOptions}
-    </select>
+            const pageTitle = isAll ? "M Panora — All Phases" : PHASES[tab].title;
 
-    <div class="modal-actions">
-      <button class="btn" id="cancelUnit">Cancel</button>
-      <button class="btn primary" id="saveUnit">Save change</button>
-    </div>
+            app.innerHTML = `
+            <div class="masthead">
+              <div class="masthead-left">
+                <span class="app-title">GatekeeperGo</span>
+                <span class="app-sub">M Panora Unit Status Tracker</span>
+              </div>
+              <div class="masthead-right">
+                ${state.isAdmin ? '<button class="setup-btn" id="setupBtn">Manage in-house list</button>' : ''}
+                <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
+              </div>
+            </div>
 
-    <h2 style="margin-top:20px;font-size:13px;color:var(--text-secondary);">Recent history</h2>
-    <div>${historyHtml}</div>
-  `;
+            <div class="tabs">
+              <button class="tab-btn ${tab === 'all' ? 'active' : ''}" data-tab="all">ALL</button>
+              ${PHASE_KEYS.map(pk => `<button class="tab-btn ${tab === pk ? 'active' : ''}" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
+              <button class="tab-btn ${tab === 'sitemap' ? 'active' : ''}" data-tab="sitemap">Site Map</button>
+            </div>
 
-  overlay.classList.add("show");
-  document.getElementById("statusSelect").addEventListener("change", e => {
-    document.getElementById("permitField").style.display = e.target.value === "renovation" ? "block" : "none";
-  });
-  document.getElementById("closeUnit").addEventListener("click", () => overlay.classList.remove("show"));
-  document.getElementById("cancelUnit").addEventListener("click", () => overlay.classList.remove("show"));
-  document.getElementById("saveUnit").addEventListener("click", async () => {
-    const newStatus = document.getElementById("statusSelect").value;
-    const inhouseStaff = document.getElementById("inhouseSelect").value;
-    const permitExpiry = newStatus === "renovation" ? document.getElementById("permitExpiry").value : "";
-    const renovationNote = newStatus === "renovation" ? document.getElementById("renovationNote").value.trim() : "";
-    if (!inhouseStaff) {
-      alert("Please select which in-house staff is making this update.");
-      return;
-    }
-    const saveBtn = document.getElementById("saveUnit");
-    saveBtn.disabled = true;
-    saveBtn.textContent = "Saving…";
+            <div class="alert-banner ${combined.mismatchCount > 0 ? 'show' : ''}">
+              <span><b>${combined.mismatchCount} unit${combined.mismatchCount === 1 ? '' : 's'}</b> marked under renovation with no VP recorded in history: ${combined.mismatchUnits.map(({phaseKey, no}) => { const l = unitLabel(phaseKey, no); return `${isAll ? PHASES[phaseKey].label + ' ' : ''}P-${l.lot} (${l.address})`; }).join(", ") || "—"}. Confirm before allowing contractor access.</span>
+            </div>
 
-    const now = new Date().toISOString();
-    const previous = JSON.parse(JSON.stringify(u));
-    u.status = newStatus;
-    u.updatedBy = inhouseStaff;
-    u.updatedAt = now;
-    u.permitExpiry = permitExpiry;
-    u.renovationNote = renovationNote;
-    u.history = u.history || [];
-    u.history.push({ status: newStatus, updatedBy: inhouseStaff, updatedAt: now, permitExpiry: permitExpiry || undefined, renovationNote: renovationNote || undefined });
-    if (u.history.length > 20) u.history = u.history.slice(-20);
+            <div class="alert-banner expired-banner ${combined.expiredCount > 0 ? 'show' : ''}">
+              <span><b>${combined.expiredCount} unit${combined.expiredCount === 1 ? '' : 's'}</b> have an expired renovation permit: ${combined.expiredUnits.map(({phaseKey, no}) => { const l = unitLabel(phaseKey, no); return `${isAll ? PHASES[phaseKey].label + ' ' : ''}P-${l.lot} (${l.address})`; }).join(", ") || "—"}. Contractors should not be working on these units until the permit is renewed.</span>
+            </div>
 
-    const ok = await saveUnits(phaseKey);
-    if (!ok) {
-      state.units[phaseKey][unitNo] = previous;
-      saveBtn.disabled = false;
-      saveBtn.textContent = "Save change";
-      return;
-    }
-    overlay.classList.remove("show");
-    render();
-  });
-}
+            <div class="header">
+              <div>
+                <h1>${pageTitle}</h1>
+                <p>${combined.total} units</p>
+              </div>
+            </div>
 
-function openInhouseModal() {
-  const overlay = document.getElementById("inhouseOverlay");
-  renderInhouseModal();
-  overlay.classList.add("show");
-}
+            <div class="stats ${isAll ? 'stats-5' : ''}">
+              ${isAll ? `<div class="stat-card"><div class="stat-num">${combined.total}</div><div class="stat-label">Total units (both phases)</div></div>` : ''}
+              <div class="stat-card stat-vp"><div class="stat-num">${combined.total - combined.counts.vacant}</div><div class="stat-label">Total VP issued (total − vacant)</div></div>
+              <div class="stat-card stat-vacant"><div class="stat-num">${combined.counts.vacant}</div><div class="stat-label">Vacant Unit</div></div>
+              <div class="stat-card stat-renovation"><div class="stat-num">${combined.counts.renovation}</div><div class="stat-label">Renovation Unit</div></div>
+              <div class="stat-card stat-movein"><div class="stat-num">${combined.counts.movein}</div><div class="stat-label">Move-in Unit</div></div>
+            </div>
 
-function renderInhouseModal() {
-  const modal = document.getElementById("inhouseModal");
-  modal.innerHTML = `
-    <button class="close-x" id="closeInhouse">&times;</button>
-    <h2>In-house list</h2>
-    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 10px;">Add the names in-house staff will pick from when updating a unit. Shared across all phases.</p>
-    <div id="inhouseRows">
-      ${state.inhouseList.map((g, i) => `
-        <div class="inhouse-row">
-          <input type="text" value="${g}" data-idx="${i}" class="inhouseNameInput">
-          <button data-idx="${i}" class="removeInhouseBtn">Remove</button>
-        </div>
-      `).join("")}
-    </div>
-    <button class="btn" id="addInhouseBtn" style="margin-top:8px;width:100%;">+ Add in-house staff</button>
-    <div class="modal-actions">
-      <button class="btn" id="closeInhouse2">Close</button>
-      <button class="btn primary" id="saveInhouse">Save list</button>
-    </div>
-  `;
+            <div class="filter-group">
+              <div class="filter-group-title">Unit Status</div>
+              <div class="filter-group-pills">
+                <button class="filter-btn ${state.filter === 'all' ? 'active' : ''}" data-filter="all">All</button>
+                <button class="filter-btn ${state.filter === 'vacant' ? 'active' : ''}" data-filter="vacant"><span class="dot" style="background:var(--vacant-600)"></span>Vacant Unit</button>
+                <button class="filter-btn ${state.filter === 'vp' ? 'active' : ''}" data-filter="vp"><span class="dot" style="background:var(--vp-600)"></span>VP Unit</button>
+                <button class="filter-btn ${state.filter === 'renovation' ? 'active' : ''}" data-filter="renovation"><span class="dot" style="background:var(--reno-600)"></span>Renovation Unit</button>
+                <button class="filter-btn ${state.filter === 'movein' ? 'active' : ''}" data-filter="movein"><span class="dot" style="background:var(--movein-600)"></span>Move-in Unit</button>
+              </div>
+            </div>
 
-  document.getElementById("closeInhouse").addEventListener("click", () => document.getElementById("inhouseOverlay").classList.remove("show"));
-  document.getElementById("closeInhouse2").addEventListener("click", () => document.getElementById("inhouseOverlay").classList.remove("show"));
-  document.getElementById("addInhouseBtn").addEventListener("click", () => {
-    state.inhouseList.push("");
-    renderInhouseModal();
-  });
-  document.querySelectorAll(".removeInhouseBtn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.inhouseList.splice(parseInt(btn.dataset.idx), 1);
-      renderInhouseModal();
-    });
-  });
-  document.getElementById("saveInhouse").addEventListener("click", async () => {
-    const saveBtn = document.getElementById("saveInhouse");
-    const previous = JSON.parse(JSON.stringify(state.inhouseList));
-    document.querySelectorAll(".inhouseNameInput").forEach(input => {
-      state.inhouseList[parseInt(input.dataset.idx)] = input.value.trim();
-    });
-    state.inhouseList = state.inhouseList.filter(g => g.length > 0);
+            <div class="search-row">
+              <input type="text" id="searchInput" placeholder="Search house number" value="${state.search}">
+            </div>
 
-    saveBtn.disabled = true;
-    saveBtn.textContent = "Saving…";
-    const ok = await saveInhouse();
-    if (!ok) {
-      state.inhouseList = previous;
-      saveBtn.disabled = false;
-      saveBtn.textContent = "Save list";
-      return;
-    }
-    document.getElementById("inhouseOverlay").classList.remove("show");
-    render();
-  });
-}
+            <div id="grid">
+              ${cards.length === 0 ? '<div class="empty">No units match this search or filter.</div>' :
+                state.search.trim() ? `
+                  <div class="street-group">
+                    <div class="street-group-header">
+                      <span>Search results <span class="street-group-count">${cards.length} unit${cards.length === 1 ? '' : 's'}</span></span>
+                    </div>
+                    <div class="grid">
+                      ${cards.map(({ phaseKey, no }) => renderUnitCard(phaseKey, no, isAll)).join("")}
+                    </div>
+                  </div>
+                ` :
+                (() => {
+                  const groups = {};
+                  cards.forEach(({ phaseKey, no }) => {
+                    const { address } = unitLabel(phaseKey, no);
+                    const street = streetName(address);
+                    if (!groups[street]) groups[street] = [];
+                    groups[street].push({ phaseKey, no });
+                  });
+                  const streetKeys = Object.keys(groups).sort((a, b) => {
+                    const ka = streetSortKey(a), kb = streetSortKey(b);
+                    return ka[0] - kb[0] || ka[1] - kb[1];
+                  });
+                  return streetKeys.map(street => {
+                    const streetCounts = { vacant: 0, vp: 0, renovation: 0, movein: 0 };
+                    groups[street].forEach(({ phaseKey, no }) => {
+                      streetCounts[state.units[phaseKey][no].status]++;
+                    });
+                    return `
+                      <div class="street-group">
+                        <div class="street-group-header">
+                          <span>${street} <span class="street-group-count">${groups[street].length} unit${groups[street].length === 1 ? '' : 's'}</span></span>
+                          <span class="street-group-breakdown">
+                            <span class="sgb-item"><span class="sgb-dot" style="background:var(--vacant-600)"></span>${streetCounts.vacant} Vacant Unit</span>
+                            <span class="sgb-item"><span class="sgb-dot" style="background:var(--vp-600)"></span>${streetCounts.vp} VP Unit</span>
+                            <span class="sgb-item"><span class="sgb-dot" style="background:var(--reno-600)"></span>${streetCounts.renovation} Renovation Unit</span>
+                            <span class="sgb-item"><span class="sgb-dot" style="background:var(--movein-600)"></span>${streetCounts.movein} Move-in Unit</span>
+                          </span>
+                        </div>
+                        <div class="grid">
+                          ${groups[street].map(({ phaseKey, no }) => renderUnitCard(phaseKey, no, isAll)).join("")}
+                        </div>
+                      </div>
+                    `;
+                  }).join("");
+                })()
+              }
+            </div>
 
-(async function init() {
-  await loadData();
-  render();
-})();
-</script>
+            <div class="overlay" id="unitOverlay">
+              <div class="modal" id="unitModal"></div>
+            </div>
+
+            <div class="overlay" id="inhouseOverlay">
+              <div class="modal" id="inhouseModal"></div>
+            </div>
+          `;
+
+            // ── Event wiring ──
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    state.activeTab = btn.dataset.tab;
+                    state.filter = "all";
+                    state.search = "";
+                    render();
+                });
+            });
+
+            const searchInput = document.getElementById("searchInput");
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    state.search = e.target.value;
+                    const cursorPos = e.target.selectionStart;
+                    render();
+                    const newInput = document.getElementById("searchInput");
+                    if (newInput) {
+                        newInput.focus();
+                        newInput.setSelectionRange(cursorPos, cursorPos);
+                    }
+                });
+            }
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    state.filter = btn.dataset.filter;
+                    render();
+                });
+            });
+
+            document.querySelectorAll(".unit-card").forEach(card => {
+                card.addEventListener("click", () => {
+                    if (!state.isAdmin) {
+                        alert("Viewing only. Log in as admin to update unit status.");
+                        return;
+                    }
+                    openUnitModal(card.dataset.phase, card.dataset.unit);
+                });
+            });
+
+            const setupBtnEl = document.getElementById("setupBtn");
+            if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
+
+            const adminBtn = document.getElementById("adminBtn");
+            if (adminBtn) {
+                adminBtn.addEventListener("click", () => {
+                    if (state.isAdmin) {
+                        state.isAdmin = false;
+                        render();
+                    } else {
+                        const entered = prompt("Enter admin password:");
+                        if (entered === null) return;
+                        if (entered === ADMIN_PASSWORD) {
+                            state.isAdmin = true;
+                            render();
+                        } else {
+                            alert("Incorrect password.");
+                        }
+                    }
+                });
+            }
+        }
+
+        // ── Unit Modal ──
+        function openUnitModal(phaseKey, unitNo) {
+            const u = state.units[phaseKey][unitNo];
+            const overlay = document.getElementById("unitOverlay");
+            const modal = document.getElementById("unitModal");
+            const { lot, address } = unitLabel(phaseKey, unitNo);
+
+            const inhouseOptions = state.inhouseList.length ?
+                state.inhouseList.map(g => `<option value="${g}">${g}</option>`).join("") :
+                `<option value="">No in-house staff set up yet</option>`;
+
+            const historyHtml = (u.history || []).slice().reverse().slice(0, 10).map(h => `
+              <div class="history-item">
+                <div class="h-status">${STATUS_DEFS[h.status].label}${h.status === 'renovation' && h.permitExpiry ? ` · permit until ${formatPermitDate(h.permitExpiry)}` : ''}</div>
+                ${h.status === 'renovation' && h.renovationNote ? `<div class="h-meta" style="font-style:italic;">"${h.renovationNote.replace(/</g, "&lt;")}"</div>` : ''}
+                <div class="h-meta">${h.updatedBy || "Unknown"} · ${formatDate(h.updatedAt)}</div>
+              </div>
+            `).join("") || '<div class="history-item h-meta">No changes logged yet.</div>';
+
+            modal.innerHTML = `
+            <button class="close-x" id="closeUnit">&times;</button>
+            <h2>P-${lot}</h2>
+            <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;">
+              ${PHASES[phaseKey].label}${address ? ` · ${address}` : ''}<br>
+              Current status: <b>${STATUS_DEFS[u.status].label}</b><br>
+              Last updated: ${u.updatedAt ? formatDate(u.updatedAt) + " by " + (u.updatedBy || "—") : "Never"}
+              ${u.status === 'renovation' && u.permitExpiry ? `<br>Permit valid until: <b>${formatPermitDate(u.permitExpiry)}</b>${isExpiredPermit(phaseKey, unitNo) ? ' <span style="color:var(--danger-600)">(expired)</span>' : ''}` : ''}
+              ${u.status === 'renovation' && u.renovationNote ? `<br>Note: <i>${u.renovationNote.replace(/</g, "&lt;")}</i>` : ''}
+            </p>
+
+            <label for="statusSelect">Update status</label>
+            <select id="statusSelect">
+              ${Object.entries(STATUS_DEFS).map(([key, def]) =>
+                `<option value="${key}" ${key === u.status ? "selected" : ""}>${def.label}</option>`
+              ).join("")}
+            </select>
+
+            <div id="permitField" style="display:${u.status === 'renovation' ? 'block' : 'none'};">
+              <label for="permitExpiry">Renovation permit valid until</label>
+              <input type="date" id="permitExpiry" value="${u.permitExpiry || ''}">
+              <label for="renovationNote">Notes on current status</label>
+              <textarea id="renovationNote" rows="3" placeholder="e.g. Tiling in progress, expected completion next week">${u.renovationNote || ''}</textarea>
+            </div>
+
+            <label for="inhouseSelect">Updated by</label>
+            <select id="inhouseSelect">
+              <option value="">Select in-house…</option>
+              ${inhouseOptions}
+            </select>
+
+            <div class="modal-actions">
+              <button class="btn" id="cancelUnit">Cancel</button>
+              <button class="btn primary" id="saveUnit">Save change</button>
+            </div>
+
+            <h2 style="margin-top:20px;font-size:13px;color:var(--text-secondary);">Recent history</h2>
+            <div>${historyHtml}</div>
+          `;
+
+            overlay.classList.add("show");
+
+            document.getElementById("statusSelect").addEventListener("change", (e) => {
+                document.getElementById("permitField").style.display = e.target.value === "renovation" ? "block" :
+                    "none";
+            });
+
+            document.getElementById("closeUnit").addEventListener("click", () => overlay.classList.remove("show"));
+            document.getElementById("cancelUnit").addEventListener("click", () => overlay.classList.remove("show"));
+
+            document.getElementById("saveUnit").addEventListener("click", async () => {
+                const newStatus = document.getElementById("statusSelect").value;
+                const inhouseStaff = document.getElementById("inhouseSelect").value;
+                const permitExpiry = newStatus === "renovation" ? document.getElementById("permitExpiry")
+                .value : "";
+                const renovationNote = newStatus === "renovation" ? document.getElementById("renovationNote")
+                    .value.trim() : "";
+
+                if (!inhouseStaff) {
+                    alert("Please select which in-house staff is making this update.");
+                    return;
+                }
+
+                const saveBtn = document.getElementById("saveUnit");
+                saveBtn.disabled = true;
+                saveBtn.textContent = "Saving…";
+
+                const now = new Date().toISOString();
+                const previous = JSON.parse(JSON.stringify(u));
+                u.status = newStatus;
+                u.updatedBy = inhouseStaff;
+                u.updatedAt = now;
+                u.permitExpiry = permitExpiry;
+                u.renovationNote = renovationNote;
+                u.history = u.history || [];
+                u.history.push({ status: newStatus, updatedBy: inhouseStaff, updatedAt: now,
+                    permitExpiry: permitExpiry || undefined, renovationNote: renovationNote || undefined });
+                if (u.history.length > 20) u.history = u.history.slice(-20);
+
+                const ok = await saveUnits(phaseKey);
+                if (!ok) {
+                    state.units[phaseKey][unitNo] = previous;
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "Save change";
+                    return;
+                }
+                overlay.classList.remove("show");
+                render();
+            });
+        }
+
+        // ── In-house Modal ──
+        function openInhouseModal() {
+            const overlay = document.getElementById("inhouseOverlay");
+            renderInhouseModal();
+            overlay.classList.add("show");
+        }
+
+        function renderInhouseModal() {
+            const modal = document.getElementById("inhouseModal");
+            modal.innerHTML = `
+            <button class="close-x" id="closeInhouse">&times;</button>
+            <h2>In-house list</h2>
+            <p style="font-size:12px;color:var(--text-secondary);margin:0 0 10px;">Add the names in-house staff will pick from when updating a unit. Shared across all phases.</p>
+            <div id="inhouseRows">
+              ${state.inhouseList.map((g, i) => `
+                <div class="inhouse-row">
+                  <input type="text" value="${g}" data-idx="${i}" class="inhouseNameInput">
+                  <button data-idx="${i}" class="removeInhouseBtn">Remove</button>
+                </div>
+              `).join("")}
+            </div>
+            <button class="btn" id="addInhouseBtn" style="margin-top:8px;width:100%;">+ Add in-house staff</button>
+            <div class="modal-actions">
+              <button class="btn" id="closeInhouse2">Close</button>
+              <button class="btn primary" id="saveInhouse">Save list</button>
+            </div>
+          `;
+
+            document.getElementById("closeInhouse").addEventListener("click", () => document.getElementById(
+                "inhouseOverlay").classList.remove("show"));
+            document.getElementById("closeInhouse2").addEventListener("click", () => document.getElementById(
+                "inhouseOverlay").classList.remove("show"));
+
+            document.getElementById("addInhouseBtn").addEventListener("click", () => {
+                state.inhouseList.push("");
+                renderInhouseModal();
+            });
+
+            document.querySelectorAll(".removeInhouseBtn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    state.inhouseList.splice(parseInt(btn.dataset.idx), 1);
+                    renderInhouseModal();
+                });
+            });
+
+            document.getElementById("saveInhouse").addEventListener("click", async () => {
+                const saveBtn = document.getElementById("saveInhouse");
+                const previous = JSON.parse(JSON.stringify(state.inhouseList));
+                document.querySelectorAll(".inhouseNameInput").forEach(input => {
+                    state.inhouseList[parseInt(input.dataset.idx)] = input.value.trim();
+                });
+                state.inhouseList = state.inhouseList.filter(g => g.length > 0);
+
+                saveBtn.disabled = true;
+                saveBtn.textContent = "Saving…";
+                const ok = await saveInhouse();
+                if (!ok) {
+                    state.inhouseList = previous;
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "Save list";
+                    return;
+                }
+                document.getElementById("inhouseOverlay").classList.remove("show");
+                render();
+            });
+        }
+
+        // ── Init ──
+        (async function init() {
+            await loadData();
+            render();
+
+            // Allow drag-and-drop PDF onto the page for quick upload
+            document.addEventListener('dragover', (e) => e.preventDefault());
+            document.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.type === 'application/pdf') {
+                        handlePDFUpload(file);
+                    } else {
+                        alert('Please drop a PDF file.');
+                    }
+                }
+            });
+
+            console.log('GatekeeperGo loaded. Upload a PDF to see it in the Site Map tab.');
+        })();
+    </script>
 
 </body>
 </html>
