@@ -16,7 +16,6 @@
             --text-tertiary: #888780;
             --radius-md: 8px;
             --radius-lg: 12px;
-
             --vacant-50: #EDEBE4;
             --vacant-600: #888780;
             --vacant-800: #444441;
@@ -52,7 +51,6 @@
             margin: 0 auto;
             padding: 24px 20px 60px;
         }
-
         .header {
             display: flex;
             align-items: flex-start;
@@ -96,17 +94,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-weight: 400;
         }
-        .header h1 {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 0 0 4px;
-        }
-        .header p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
         .tabs {
             display: flex;
             gap: 8px;
@@ -128,7 +115,6 @@
             background: var(--text-primary);
             border-color: var(--text-primary);
         }
-
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -183,7 +169,6 @@
             margin-top: 2px;
             line-height: 1.3;
         }
-
         .alert-banner {
             display: none;
             background: var(--danger-50);
@@ -210,7 +195,6 @@
         .alert-banner.expired-banner b {
             color: #8C2E2E;
         }
-
         .search-row {
             margin-bottom: 12px;
         }
@@ -248,7 +232,6 @@
             margin-right: 5px;
             vertical-align: middle;
         }
-
         .filter-group {
             border: 1px solid #000000;
             border-radius: var(--radius-lg);
@@ -269,7 +252,6 @@
             gap: 8px;
             flex-wrap: wrap;
         }
-
         .setup-btn {
             padding: 7px 12px;
             border: 1px solid var(--border);
@@ -285,7 +267,6 @@
             color: #085041;
             font-weight: 600;
         }
-
         .street-group {
             border: 1px solid #000000;
             border-radius: var(--radius-lg);
@@ -329,7 +310,6 @@
             height: 7px;
             border-radius: 50%;
         }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -387,7 +367,6 @@
             background: #E68A8A;
             right: 16px;
         }
-
         .unit-card.vacant {
             background: var(--vacant-50);
             border: 1px solid #000000;
@@ -398,7 +377,6 @@
         .unit-card.vacant .ustatus {
             color: var(--vacant-800);
         }
-
         .unit-card.vp {
             background: var(--vp-50);
             border: 1px solid var(--vp-600);
@@ -409,7 +387,6 @@
         .unit-card.vp .ustatus {
             color: var(--vp-800);
         }
-
         .unit-card.renovation {
             background: var(--reno-50);
             border: 1px solid var(--reno-600);
@@ -420,7 +397,6 @@
         .unit-card.renovation .ustatus {
             color: var(--reno-800);
         }
-
         .unit-card.movein {
             background: var(--movein-50);
             border: 1px solid #22C55E;
@@ -431,7 +407,6 @@
         .unit-card.movein .ustatus {
             color: var(--movein-800);
         }
-
         .unit-card.expired-permit {
             border: 2px solid #C94343;
             background: #FDEAEA;
@@ -442,14 +417,12 @@
         .unit-card.expired-permit .ustatus {
             color: #962E2E;
         }
-
         .empty {
             text-align: center;
             padding: 50px 20px;
             color: var(--text-tertiary);
             font-size: 13px;
         }
-
         .overlay {
             position: fixed;
             inset: 0;
@@ -531,7 +504,6 @@
             background: none;
             border: none;
         }
-
         .history-item {
             padding: 8px 0;
             border-bottom: 1px solid var(--border-soft);
@@ -547,7 +519,6 @@
             color: var(--text-tertiary);
             margin-top: 2px;
         }
-
         .inhouse-row {
             display: flex;
             gap: 8px;
@@ -565,14 +536,12 @@
             font-size: 12px;
             padding: 4px 8px;
         }
-
         .loading {
             text-align: center;
             padding: 60px;
             color: var(--text-tertiary);
             font-size: 13px;
         }
-
         @media (max-width: 520px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
@@ -596,36 +565,38 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            min-height: 500px;
+            min-height: 300px;
             overflow: hidden;
         }
-        .sm-pdf-container canvas {
+        .sm-pdf-container img {
             max-width: 100%;
             height: auto;
             display: block;
+            border: 1px solid var(--border-soft);
+            border-radius: 4px;
         }
-        .sm-pdf-container .sm-pdf-placeholder {
+        .sm-pdf-placeholder {
             padding: 60px 20px;
             text-align: center;
             color: var(--text-tertiary);
             font-size: 14px;
         }
-        .sm-pdf-container .sm-pdf-placeholder .icon {
+        .sm-pdf-placeholder .icon {
             font-size: 48px;
             display: block;
             margin-bottom: 12px;
         }
-        .sm-pdf-container .sm-pdf-placeholder .hint {
+        .sm-pdf-placeholder .hint {
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 6px;
         }
-        .sm-pdf-container .sm-pdf-page-wrap {
+        .sm-pdf-page-wrap {
             display: flex;
             justify-content: center;
             width: 100%;
+            padding: 10px;
         }
-
         .sm-notes {
             margin-top: 16px;
             padding: 12px 14px;
@@ -637,6 +608,35 @@
         }
         .sm-notes p {
             margin: 4px 0;
+        }
+        .sm-upload-area {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .sm-upload-area input[type="file"] {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .sm-upload-area .file-name {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .sm-upload-area .remove-btn {
+            background: none;
+            border: none;
+            color: var(--danger-600);
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -956,8 +956,8 @@
             filter: "all",
             search: "",
             isAdmin: false,
-            pdfFile: null, // stores the uploaded PDF File object
-            pdfDataUrl: null // stores the data URL for display
+            pdfDataUrl: null, // stores the data URL for display
+            pdfFileName: null
         };
 
         const ADMIN_PASSWORD = "admin123";
@@ -1148,19 +1148,27 @@
         // ── PDF handling ──
         function handlePDFUpload(file) {
             if (!file || file.type !== 'application/pdf') {
-                alert('Please upload a PDF file.');
+                alert('Please select a PDF file.');
                 return;
             }
-            state.pdfFile = file;
             const reader = new FileReader();
             reader.onload = function(e) {
                 state.pdfDataUrl = e.target.result;
+                state.pdfFileName = file.name;
                 // If site map tab is active, re-render
                 if (state.activeTab === 'sitemap') {
                     render();
                 }
             };
             reader.readAsDataURL(file);
+        }
+
+        function removePDF() {
+            state.pdfDataUrl = null;
+            state.pdfFileName = null;
+            if (state.activeTab === 'sitemap') {
+                render();
+            }
         }
 
         // ── renderSiteMap: shows PDF as a picture ──
@@ -1173,7 +1181,7 @@
                   <img src="${state.pdfDataUrl}" alt="Site Plan" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:4px;" />
                 </div>
                 <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);">
-                  <b>Site Plan</b> — ${state.pdfFile ? state.pdfFile.name : 'PDF'}
+                  <b>${state.pdfFileName || 'Site Plan'}</b>
                 </div>
               </div>
             ` : `
@@ -1181,7 +1189,7 @@
                 <div class="sm-pdf-placeholder">
                   <span class="icon">📄</span>
                   <div>No site plan uploaded.</div>
-                  <div class="hint">Upload a PDF to display the site map.</div>
+                  <div class="hint">Select a PDF file below to display.</div>
                 </div>
               </div>
             `;
@@ -1207,13 +1215,13 @@
             ${pdfHtml}
 
             <div class="sm-notes">
-              <p><b>Site Map:</b> Displays the uploaded site plan PDF as a picture.</p>
-              <p>To update the site plan, upload a new PDF using the file input below.</p>
-              <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                <input type="file" id="pdfUploadInput" accept=".pdf" style="padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-md);font-size:13px;" />
-                <button class="btn primary" id="pdfUploadBtn" style="flex:0 0 auto;padding:6px 16px;">Upload PDF</button>
-                ${state.pdfFile ? `<span style="font-size:12px;color:var(--text-secondary);">✓ ${state.pdfFile.name}</span>` : ''}
+              <p><b>Upload a new site plan:</b> Select a PDF file below. It will be displayed immediately.</p>
+              <div class="sm-upload-area">
+                <input type="file" id="pdfUploadInput" accept=".pdf" />
+                ${state.pdfFileName ? `<span class="file-name">✓ ${state.pdfFileName}</span>` : ''}
+                ${state.pdfFileName ? `<button class="remove-btn" id="removePdfBtn">Remove</button>` : ''}
               </div>
+              <p style="margin-top:8px;font-size:11px;color:var(--text-tertiary);">You can also drag and drop a PDF file anywhere on the page.</p>
             </div>
           `;
 
@@ -1248,22 +1256,22 @@
             const setupBtnEl = document.getElementById("setupBtn");
             if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
 
-            // PDF upload
-            const uploadBtn = document.getElementById("pdfUploadBtn");
+            // PDF upload: auto-upload on change
             const uploadInput = document.getElementById("pdfUploadInput");
-            if (uploadBtn && uploadInput) {
-                uploadBtn.addEventListener("click", () => {
-                    const file = uploadInput.files[0];
+            if (uploadInput) {
+                uploadInput.addEventListener("change", (e) => {
+                    const file = e.target.files[0];
                     if (file) {
                         handlePDFUpload(file);
-                    } else {
-                        alert("Please select a PDF file first.");
                     }
+                    // Clear the input so re-selecting the same file works
+                    uploadInput.value = '';
                 });
-                uploadInput.addEventListener("change", () => {
-                    const file = uploadInput.files[0];
-                    if (file) handlePDFUpload(file);
-                });
+            }
+
+            const removeBtn = document.getElementById("removePdfBtn");
+            if (removeBtn) {
+                removeBtn.addEventListener("click", removePDF);
             }
         }
 
@@ -1677,7 +1685,7 @@
             await loadData();
             render();
 
-            // Allow drag-and-drop PDF onto the page for quick upload
+            // Drag-and-drop for PDF anywhere on the page
             document.addEventListener('dragover', (e) => e.preventDefault());
             document.addEventListener('drop', (e) => {
                 e.preventDefault();
@@ -1686,6 +1694,11 @@
                     const file = files[0];
                     if (file.type === 'application/pdf') {
                         handlePDFUpload(file);
+                        // If not on sitemap tab, switch to it
+                        if (state.activeTab !== 'sitemap') {
+                            state.activeTab = 'sitemap';
+                            render();
+                        }
                     } else {
                         alert('Please drop a PDF file.');
                     }
@@ -1695,6 +1708,5 @@
             console.log('GatekeeperGo loaded. Upload a PDF to see it in the Site Map tab.');
         })();
     </script>
-
 </body>
 </html>
