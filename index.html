@@ -188,92 +188,6 @@
     .stats .stat-card:first-child{grid-column:1 / -1;}
     .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
   }
-
-  /* ── Site Map Image Viewer ── */
-  .sm-image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0;
-    width: 100%;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    min-height: 300px;
-    overflow: hidden;
-  }
-  .sm-image-container img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border: 1px solid var(--border-soft);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .sm-image-container .sm-image-placeholder {
-    padding: 60px 20px;
-    text-align: center;
-    color: var(--text-tertiary);
-    font-size: 14px;
-  }
-  .sm-image-container .sm-image-placeholder .icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 12px;
-  }
-  .sm-image-container .sm-image-placeholder .hint {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 6px;
-  }
-  .sm-image-wrap {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-  }
-  .sm-upload-area {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-  .sm-upload-area input[type="file"] {
-    padding: 6px 10px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    font-size: 13px;
-    background: var(--bg-card);
-    color: var(--text-primary);
-    cursor: pointer;
-  }
-  .sm-upload-area .file-name {
-    font-size: 13px;
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-  .sm-upload-area .remove-btn {
-    background: none;
-    border: none;
-    color: var(--danger-600);
-    cursor: pointer;
-    font-size: 13px;
-    text-decoration: underline;
-  }
-  .sm-notes {
-    margin-top: 16px;
-    padding: 12px 14px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-  .sm-notes p {
-    margin: 4px 0;
-  }
 </style>
 </head>
 <body>
@@ -337,9 +251,7 @@ let state = {
   inhouseList: [],
   filter: "all",
   search: "",
-  isAdmin: false,
-  pdfDataUrl: null,
-  pdfFileName: null
+  isAdmin: false
 };
 
 const ADMIN_PASSWORD = "admin123";
@@ -498,134 +410,7 @@ function renderUnitCard(phaseKey, no, isAll) {
   `;
 }
 
-function handlePDFUpload(file) {
-  if (!file || file.type !== 'application/pdf') {
-    alert('Please select a PDF file.');
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    state.pdfDataUrl = e.target.result;
-    state.pdfFileName = file.name;
-    if (state.activeTab === 'sitemap') {
-      render();
-    }
-  };
-  reader.readAsDataURL(file);
-}
-
-function removePDF() {
-  state.pdfDataUrl = null;
-  state.pdfFileName = null;
-  if (state.activeTab === 'sitemap') {
-    render();
-  }
-}
-
-// ── Site Map: shows uploaded PDF as image ──
-function renderSiteMap() {
-  const app = document.getElementById("app");
-
-  const pdfHtml = state.pdfDataUrl ? `
-    <div class="sm-image-container">
-      <div class="sm-image-wrap">
-        <img src="${state.pdfDataUrl}" alt="Site Plan" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.06);" />
-      </div>
-      <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);text-align:center;">
-        <b>${state.pdfFileName || 'Site Plan'}</b>
-      </div>
-    </div>
-  ` : `
-    <div class="sm-image-container">
-      <div class="sm-image-placeholder">
-        <span class="icon">📄</span>
-        <div>No site plan uploaded.</div>
-        <div class="hint">Upload your PANORA DIAGRAM.jpg or PDF file below.</div>
-      </div>
-    </div>
-  `;
-
-  const html = `
-    <div class="masthead">
-      <div class="masthead-left">
-        <span class="app-title">GatekeeperGo</span>
-        <span class="app-sub">M Panora Unit Status Tracker</span>
-      </div>
-      <div class="masthead-right">
-        ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
-        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
-      </div>
-    </div>
-
-    <div class="tabs">
-      <button class="tab-btn" data-tab="all">ALL</button>
-      ${PHASE_KEYS.map(pk => `<button class="tab-btn" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
-      <button class="tab-btn active" data-tab="sitemap">Site Map</button>
-    </div>
-
-    ${pdfHtml}
-
-    <div class="sm-notes">
-      <p><b>Upload Site Plan:</b> Select your PANORA DIAGRAM.jpg or PDF file below.</p>
-      <div class="sm-upload-area">
-        <input type="file" id="pdfUploadInput" accept=".jpg,.jpeg,.png,.pdf" />
-        ${state.pdfFileName ? `<span class="file-name">✓ ${state.pdfFileName}</span>` : ''}
-        ${state.pdfFileName ? `<button class="remove-btn" id="removePdfBtn">Remove</button>` : ''}
-      </div>
-      <p style="margin-top:8px;font-size:11px;color:var(--text-tertiary);">You can also drag and drop an image or PDF file anywhere on the page.</p>
-      <p><b>Legend:</b> Type A – Terrace House (24’ x 65’) 2-Storey</p>
-    </div>
-  `;
-
-  app.innerHTML = html;
-
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.activeTab = btn.dataset.tab;
-      state.filter = "all";
-      state.search = "";
-      render();
-    });
-  });
-
-  const adminBtn = document.getElementById("adminBtn");
-  if (adminBtn) adminBtn.addEventListener("click", () => {
-    if (state.isAdmin) {
-      state.isAdmin = false;
-      render();
-      return;
-    }
-    const entered = prompt("Enter admin password:");
-    if (entered === ADMIN_PASSWORD) {
-      state.isAdmin = true;
-      render();
-    } else if (entered !== null) {
-      alert("Incorrect password.");
-    }
-  });
-
-  const setupBtnEl = document.getElementById("setupBtn");
-  if (setupBtnEl) setupBtnEl.addEventListener("click", openInhouseModal);
-
-  const uploadInput = document.getElementById("pdfUploadInput");
-  if (uploadInput) {
-    uploadInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        handlePDFUpload(file);
-      }
-      uploadInput.value = '';
-    });
-  }
-
-  const removeBtn = document.getElementById("removePdfBtn");
-  if (removeBtn) {
-    removeBtn.addEventListener("click", removePDF);
-  }
-}
-
 function render() {
-  if (state.activeTab === "sitemap") { renderSiteMap(); return; }
   const app = document.getElementById("app");
   const tab = state.activeTab;
   const isAll = tab === "all";
@@ -680,7 +465,6 @@ function render() {
     <div class="tabs">
       <button class="tab-btn ${tab === 'all' ? 'active' : ''}" data-tab="all">ALL</button>
       ${PHASE_KEYS.map(pk => `<button class="tab-btn ${tab === pk ? 'active' : ''}" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
-      <button class="tab-btn ${tab === 'sitemap' ? 'active' : ''}" data-tab="sitemap">Site Map</button>
     </div>
 
     <div class="alert-banner ${combined.mismatchCount > 0 ? 'show' : ''}">
@@ -996,25 +780,6 @@ function renderInhouseModal() {
 (async function init() {
   await loadData();
   render();
-
-  // Drag and drop support
-  document.addEventListener('dragover', (e) => e.preventDefault());
-  document.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      if (file.type === 'application/pdf' || file.type.startsWith('image/')) {
-        handlePDFUpload(file);
-        if (state.activeTab !== 'sitemap') {
-          state.activeTab = 'sitemap';
-          render();
-        }
-      } else {
-        alert('Please drop an image or PDF file.');
-      }
-    }
-  });
 })();
 </script>
 
