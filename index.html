@@ -52,6 +52,8 @@
     font-size:14px;font-weight:600;cursor:pointer;color:var(--text-secondary);
   }
   .tab-btn.active{color:var(--bg-card);background:var(--text-primary);border-color:var(--text-primary);}
+  .tab-btn.admin-tab-btn{margin-left:auto;background:var(--bg-card);color:var(--text-secondary);}
+  .tab-btn.admin-tab-btn.admin-active{background:var(--movein-50);border-color:var(--movein-600);color:var(--movein-800);}
 
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
   .stats.stats-5{grid-template-columns:repeat(5,1fr);}
@@ -189,6 +191,7 @@
     .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -458,13 +461,13 @@ function render() {
       </div>
       <div class="masthead-right">
         ${state.isAdmin ? `<button class="setup-btn" id="setupBtn">Manage in-house list</button>` : ''}
-        <button class="setup-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
       </div>
     </div>
 
     <div class="tabs">
       <button class="tab-btn ${tab === 'all' ? 'active' : ''}" data-tab="all">ALL</button>
       ${PHASE_KEYS.map(pk => `<button class="tab-btn ${tab === pk ? 'active' : ''}" data-tab="${pk}">${PHASES[pk].label}</button>`).join("")}
+      <button class="tab-btn admin-tab-btn ${state.isAdmin ? 'admin-active' : ''}" id="adminBtn">${state.isAdmin ? 'Admin: Logout' : 'Admin Login'}</button>
     </div>
 
     <div class="alert-banner ${combined.mismatchCount > 0 ? 'show' : ''}">
